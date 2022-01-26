@@ -1,8 +1,14 @@
 package controller;
 
-public class Game {
+import models.SceneContainer;
 
-    void loadScenes() {
-        
+public class Game {
+    SceneContainer scenes;
+
+    public void execute(){
+        scenes = new SceneContainer();
     }
+
+
+
 }
