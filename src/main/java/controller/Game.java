@@ -43,19 +43,20 @@ public class Game {
         return 0;
     }
 
-    private void runSceneOneCareer(Person player) {
+    private String runSceneOneCareer(Person player) {
         if(player.hasEducation()) {
-            System.out.println("You finished college. What do you want to do?");
+            System.out.println("Congratulations!\nYou finished college. What do you want to do?\n Enter ANTARCTIC EXPLORER, DOCTOR, or CHARITY WORKER");
         } else {
-            System.out.println("You didn't go to college. Pick your career.");
+            System.out.println("You decided to skip the college route.\n Pick your career.\n Enter UNDERWATER SEA WELDER , SOFTWARE ENGINEER, or MUSICIAN");
         }
+        return "";
     }
 
     private Person getPlayerBasicData() {
         return new Person();
     }
 
-    public static String welcome() {
+    private String welcome() {
         System.out.println("Welcome to Get Rich Or Die Trying.\n At a young age you realize that you want to be a millionaire by 40 years old.\n Your mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
         return "";
     }
