@@ -4,6 +4,8 @@ import models.Person;
 import models.Scene;
 import models.SceneContainer;
 
+import java.util.Scanner;
+
 public class Game {
     SceneContainer scenes;
     Person player;
@@ -53,6 +55,18 @@ public class Game {
     }
 
     private Person getPlayerBasicData() {
+        Scanner playerInput = new Scanner(System.in);
+
+        System.out.println("Enter your Name: ");
+        String playerName = playerInput.nextLine();
+
+        Scanner playerInput2 = new Scanner(System.in);
+
+        System.out.println("Do you want to go to college ? Y/N: ");
+        String educationChoice = playerInput2.nextLine();
+
+
+        System.out.println("Your name is" + playerName + ". You chose " + educationChoice + "for college. ");
         return new Person();
     }
 
