@@ -10,13 +10,13 @@ public class testerAnvy {
 
     @Test
     public void intro() {
-        System.out.println(Game.welcome());
+//        System.out.println(Game.welcome());
 
     }
 
     @Test
     public void career() {
-        System.out.println(Game.runSceneOneCareer(player));
+//        System.out.println(Game.runSceneOneCareer(player));
     }
 
 
