@@ -14,12 +14,12 @@
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         },
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         }
       ]
     }
@@ -39,12 +39,12 @@
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         },
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         }
       ]
     }
