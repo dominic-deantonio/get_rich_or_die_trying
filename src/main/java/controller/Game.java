@@ -55,8 +55,9 @@ public class Game {
         return new Person();
     }
 
-    private void welcome() {
-        System.out.println("Welcome to Get Rich Or Die Trying");
+    public static String welcome() {
+        System.out.println("Welcome to Get Rich Or Die Trying.\n At a young age you realize that you want to be a millionaire by 40 years old.\n Your mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
+        return "";
     }
 
     private boolean shouldPlay() {
