@@ -1,7 +1,7 @@
 {
   "true": [
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Ed-true One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -14,19 +14,19 @@
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         },
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         }
       ]
     }
   ],
   "false": [
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Ed-false One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -39,12 +39,12 @@
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         },
         {
           "money" : 500000,
           "health" : 0,
-          "career" : "careers.KNOWLEDGE"
+          "career" : 0
         }
       ]
     }

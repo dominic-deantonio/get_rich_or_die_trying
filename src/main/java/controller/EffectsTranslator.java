@@ -1,36 +1,47 @@
 package controller;
 
 import models.Person;
+import models.Scene;
 
-class EffectsTranslator {
+import java.util.Map;
 
-//    public void doEffect(Person user, String effect){
-//
-//        effect = "partner:30000";
-//
-//        String[] parsed = effect.split(":");
-//
-//        String action = parsed[0];
-//        int value = Integer.parseInt(parsed[1]);
-//
-//
-//        switch(action){
-//            case "partner":
-//                user.changePartner(value);
-//                break;
-//            case "money":
-//                user.addMoney(effect);
-//                break;
-//            case "health":
-//                user.addHealth(effect);
-//                break;
-//
-//        }
-//    }
-//
-//    void modifyPartner(Person user, String effect){
-//
-//    }
+public class EffectsTranslator {
+
+    public static void doEffects(Person player, Map<String, Object> effect) {
+
+        for (String action : effect.keySet()) {
+            action = action.trim();
+            int value = (int) effect.get(action);
+
+            switch (action) {
+                case "money":
+                    player.addMoney(value);
+                    break;
+                case "health":
+                    player.addHealth(value);
+                    break;
+                case "dating":
+                    player.addPartner(value);
+                    break;
+                case "breakup":
+                    player.breakUp(value);
+                    break;
+                case "marry":
+                    player.marryPartner(value);
+                    break;
+                case "addchild":
+                    player.addChild(value);
+                    break;
+                case "career":
+                    player.changeCareer(value);
+                    break;
+                default:
+                    System.out.println("There is no valid action for the following effect: " + action + " with value " + value);
+
+            }
+        }
+
+    }
 }
 
 
