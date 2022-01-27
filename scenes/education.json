@@ -1,0 +1,52 @@
+{
+  "true": [
+    {
+      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "options": [
+        "ignore her",
+        "help her"
+      ],
+      "outcomes": [
+        "'A case of the Mondays, huh?', you say to her. She glares and you continue to the restroom. On your way back to your desk, you find a credit card in the coffee stain. She must not have realized she dropped it.",
+        "You bend to help her pick up her items. 'Everything okay?', you ask. She sighs and reaches down for her mug. 'Ugh, just a case of the Mondays, I guess.' Your hands meet on the coffee mug."
+      ],
+      "effects": [
+        {
+          "money" : 500000,
+          "health" : 0,
+          "career" : "careers.KNOWLEDGE"
+        },
+        {
+          "money" : 500000,
+          "health" : 0,
+          "career" : "careers.KNOWLEDGE"
+        }
+      ]
+    }
+  ],
+  "false": [
+    {
+      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "options": [
+        "ignore her",
+        "help her"
+      ],
+      "outcomes": [
+        "'A case of the Mondays, huh?', you say to her. She glares and you continue to the restroom. On your way back to your desk, you find a credit card in the coffee stain. She must not have realized she dropped it.",
+        "You bend to help her pick up her items. 'Everything okay?', you ask. She sighs and reaches down for her mug. 'Ugh, just a case of the Mondays, I guess.' Your hands meet on the coffee mug."
+      ],
+      "effects": [
+        {
+          "money" : 500000,
+          "health" : 0,
+          "career" : "careers.KNOWLEDGE"
+        },
+        {
+          "money" : 500000,
+          "health" : 0,
+          "career" : "careers.KNOWLEDGE"
+        }
+      ]
+    }
+  ]
+}
