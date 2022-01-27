@@ -40,7 +40,7 @@ public class Game {
 
     private int prompt(Scene currentScene) {
         System.out.println(currentScene.prompt);
-        return null;
+        return 0;
     }
 
     private void runSceneOneCareer(Person player) {
