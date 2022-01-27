@@ -1,7 +1,7 @@
 {
   "danger": [
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Career-danger1 One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Career-danger2 One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -49,7 +49,7 @@
   ],
   "passion": [
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Career-passion1 One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Career-passion2 One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -97,7 +97,7 @@
   ],
   "knowledge": [
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Career-knowledge1 One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
@@ -120,7 +120,7 @@
       ]
     },
     {
-      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Career-knowledge2 One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
       "options": [
         "ignore her",
         "help her"
