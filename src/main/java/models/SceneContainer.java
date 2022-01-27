@@ -71,4 +71,8 @@ public class SceneContainer {
 
         return new JSONObject(jsonString.toString());
     }
+
+    public Scene getRandomScene(Person player) {
+        return null;
+    }
 }
