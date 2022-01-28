@@ -13,34 +13,34 @@
       "effects": [
         {
           "money" : -50000,
-          "health" : 10,
+          "health" : 10
         },
         {
           "money" : -3000,
-          "health" : -15,
+          "health" : -15
         }
       ]
     }
   ],
   "false": [
     {
-      "prompt": "Sample Prompy ",
+      "prompt": "You go to your partner to build an addition onto your house. Your partner tells you to wait until next year, but the time to build is now. You decide to go to the bank anyways and check your account. To your surprise, your partner has put all of the money into forex. ",
       "options": [
-        "sample a",
-        "sample b"
+        "divorce",
+        "rob a bank"
       ],
       "outcomes": [
-        "sample outcome 1",
-        "sample outcome 2 "
+        "Wrong choice ! Your partner is now a millionaire. Forex worked well for them. You officially need to see a cardiologist because of a broken heart. ",
+        "Put your hands in the air-- the police caught you before you could pull out your gun. There was a grandmom at the bank who hit you knee with her cane.  Bail money is set to $10,000. Your scuffed"
       ],
       "effects": [
         {
-          "money" : 20,
-          "health" : -15,
+          "money" : -5000,
+          "health" : -25
         },
         {
-          "money" : 10,
-          "health" : 25,
+          "money" : -10000,
+          "health" : -10
         }
       ]
     }
