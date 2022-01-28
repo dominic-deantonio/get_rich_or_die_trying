@@ -1,0 +1,47 @@
+{
+  "true": [
+    {
+      "prompt": "You are considering going back to college for an advanced degree. You visit a prospective university and meet with a guidance counselor. She says you will need some remedial math classes since they are a very selective university, but she can approve the application right now if you want.",
+      "options": [
+        "get degree",
+        "no thanks"
+      ],
+      "outcomes": [
+        "The extra math classes bring a ton of stress, but after a few years you finally finish your program and graduate. You are now extremely employable.",
+        "You decide to apply to a different university which does not require the remedial math classes. It was smooth sailing, and you are marginally more employable."
+      ],
+      "effects": [
+        {
+          "health": -15,
+          "money": 90000
+        },
+        {
+          "health": 5,
+          "money": 30000
+        }
+      ]
+    }
+  ],
+  "false": [
+    {
+      "prompt": "Recent developments in technology are starting to render your job obsolete. A coworker approaches you to ask if you want to join 'The Anti-Automation League'. You have heard about the AAL in the news lately but can't remember exactly why.",
+      "options": [
+        "join league",
+        "decline invitation"
+      ],
+      "outcomes": [
+        "You join the AAL and learn of plans to bomb a robotics company. You are assigned as the getaway driver. The event goes smoothly and the robotics company is completely destroyed. While escaping, you hit a hard pothole at high speeds and the truck explodes. One of your team must have left an explosive in the truck bed. When the ambulance arrives, you pretend to be an innocent victim of the explosion.",
+        "You tell your coworker no thanks. A few weeks later, you see a news report that the AAL has bombed a robotics company. Your company's robotic workers are now at least three years delayed thanks to the AAL and the company has to pay out bonuses to keep their employees, including you."
+      ],
+      "effects": [
+        {
+          "money": 150000,
+          "health": -40
+        },
+        {
+          "money": 50000
+        }
+      ]
+    }
+  ]
+}

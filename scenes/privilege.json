@@ -1,0 +1,48 @@
+{
+  "true": [
+    {
+      "prompt": "It's a warm summer afternoon. You are cruising down the road to meet your friends at the beach for a picnic. You are 20 minutes late so you speed up a little. Then BAMMM!!! A body flies up in the air and slams back onto the ground. What do you do?",
+      "options": [
+        "ignore her",
+        "help her"
+      ],
+      "outcomes": [
+        "You panic and continue driving. You know it was the wrong thing to do. You call your father. RING RING. 'Dad? It's me. I've made a mistake.' 'Don't worry, I will take care of it.'" ,
+        "'OMG! Are you okay??' The old lady you hit is groaning on the ground. 'I will call 911.'"
+      ],
+      "effects": [
+        {
+          "money" : -10000,
+          "health" : -10
+        },
+        {
+          "money" : -20000,
+          "health" : -10
+        }
+      ]
+    }
+  ],
+  "false": [
+    {
+      "prompt": "You are standing in the check-out line at the grocery store. You are nervous because you are low on funds but need to buy food cause you're hungry. You hand the clerk your debit card. The clerks scans and says'I'm sorry, it's not going through...what do you want me to do?'",
+      "options": [
+        "put food back",
+        "shoplift"
+      ],
+      "outcomes": [
+        "You return the food back as your eyes swell with hunger. Hopefully you can pick up an odd job tomorrow and have a meal. At least you did the right thing.",
+        "You tell the clerk that you will return the food back to the shelves. As you walk toward the aisle, you pocket some cans of tunas in your puffy winter jacket. "
+      ],
+      "effects": [
+        {
+          "money" : 0,
+          "health" : -5
+        },
+        {
+          "money" : 0,
+          "health" : 5
+        }
+      ]
+    }
+  ]
+}

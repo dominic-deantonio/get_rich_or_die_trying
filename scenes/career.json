@@ -1,1 +1,74 @@
-{}
+{
+  "danger": [
+    {
+      "prompt": "While at work, you are performing maintenance on one of the generators. You are pretty sure you can skip the maintenance since nobody has used the generator since the last maintenance a couple months ago.",
+      "options": [
+        "skip maintenance",
+        "do maintenance"
+      ],
+      "outcomes": [
+        "You skip the maintenance. A couple weeks later your team turns on the generator and it immediately explodes, killing one and injuring several others. You are near the blast radius and get hit by high-velocity shrapnel. Management is then forced to pay out worker's compensation to the victims, including you.",
+        "You finish the maintenance. You turn on the generator for the final test and it explodes. You are standing very close and receive several serious burns and shrapnel. Management is forced to pay out worker's compensation to you."
+      ],
+      "effects": [
+        {
+          "money": 50000,
+          "health": -15
+        },
+        {
+          "money": 200000,
+          "health": -30
+        }
+      ]
+    }
+  ],
+  "passion": [
+    {
+      "prompt": "You are in your art studio, putting the finishing touches on your latest work. You need to decide what to do with it when it's finished.",
+      "options": [
+        "sell it",
+        "donate it",
+        "keep it"
+      ],
+      "outcomes": [
+        "You take your finished piece to the gallery for sale. It takes about five months before a local high-roller makes an offer.",
+        "You donate your art to one of your favorite charities. On your way back home, the charity owner calls you and requests several personal commissioned artworks.",
+        "You hang the art from the ceiling in your foyer. A few months later, an earthquake causes the art to fall right on your head. You'll need to go to the hospital to get this looked at."
+      ],
+      "effects": [
+        {
+          "money": 80000
+        },
+        {
+          "money": 100000,
+          "health": 5
+        },
+        {
+          "health": -10,
+          "money": -10000
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "prompt": "One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary, Anne. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "options": [
+        "ignore her",
+        "help her"
+      ],
+      "outcomes": [
+        "'A case of the Mondays, huh?', you say to Anne. She glares and you continue to the restroom. On your way back to your desk, you find a credit card in the coffee stain. Anne must not have realized she dropped it.",
+        "You bend to help Anne pick up her items. She thanks you for your help and asks if you want to get lunch. You become great friends with her and her family. You find out her father owns the company and your friendly relationship with him gets you a promotion."
+      ],
+      "effects": [
+        {
+          "money": 60000
+        },
+        {
+          "money": 90000
+        }
+      ]
+    }
+  ]
+}
