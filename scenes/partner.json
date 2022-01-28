@@ -1,0 +1,52 @@
+{
+  "true": [
+    {
+      "prompt": "The chiropractor down the street from your house loves you. You are keeping the office in business because this is your third visit for the month. You have been sleeping on an old futon with squeaky springs because you refuse to commit to your partner. It's time to make up your mind ",
+      "options": [
+        "marry partner",
+        "make another appt"
+      ],
+      "outcomes": [
+        "That back wasn't holding up eh ? Smart Choice. Great News ! You no longer pay a deductible to the chiropractor. However. you now have to go half on an extravagant wedding." ,
+        "Your partner wanted revenge and blackmailed the chiropractor to never take you on as a client. You are officially single with a bad back. A friend has offered rent their shed to you behind the house for a few weeks.  "
+      ],
+      "effects": [
+        {
+          "money" : -50000,
+          "health" : 10,
+          "career" : 0
+        },
+        {
+          "money" : -3000,
+          "health" : -15,
+          "career" : 0
+        }
+      ]
+    }
+  ],
+  "false": [
+    {
+      "prompt": "Sample Prompy ",
+      "options": [
+        "sample a",
+        "sample b"
+      ],
+      "outcomes": [
+        "sample outcome 1",
+        "sample outcome 2 "
+      ],
+      "effects": [
+        {
+          "money" : 20,
+          "health" : -15,
+          "career" : 0
+        },
+        {
+          "money" : 10,
+          "health" : 25,
+          "career" : 0
+        }
+      ]
+    }
+  ]
+}
