@@ -13,10 +13,18 @@ public enum Careers {
             KNOWLEDGE, List.of("DOCTOR", "PROFESSOR", "ACCOUNTANT"),
             PASSION, List.of("CHARITY WORKER", "MUSEUM CURATOR", "PHILOSOPHER")
     );
+
+
     private static Map<Careers, List<String>> nonCollegeCareers = Map.of(
             DANGER, List.of("UNDERWATER SEA WELDER", "TREE CUTTER", "MARINE"),
             KNOWLEDGE, List.of("DATA ENTRY", "PLUMBER", "SOFTWARE ENGINEER"),
             PASSION, List.of("SCULPTOR", "MUSICIAN", "PERFORMER")
+    );
+
+    private static Map<Careers, Integer> salaries = Map.of(
+            DANGER, 50000,
+            KNOWLEDGE, 30000,
+            PASSION, 10000
     );
 
     public static Map<Careers, List<String>> getCollegeCareers() {
@@ -25,6 +33,10 @@ public enum Careers {
 
     public static Map<Careers, List<String>> getNonCollegeCareers() {
         return nonCollegeCareers;
+    }
+
+    public int getSalaryAmount() {
+        return salaries.get(this);
     }
 
 }

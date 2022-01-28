@@ -2,7 +2,6 @@ package models;
 
 import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class Person {
 
@@ -130,6 +129,13 @@ public class Person {
     }
 
     public void addSalary() {
+        int amountToAdd = career.getSalaryAmount() * 5;
+        double educationMultiplier = hasEducation() ? 1.5 : 1;
+        int sum = (int) (amountToAdd * educationMultiplier);
+        netWorth = sum + netWorth;
+
+        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.";
+        System.out.println(msg);
 
     }
 }
