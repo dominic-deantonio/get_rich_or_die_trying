@@ -1,9 +1,7 @@
 package controller;
 
-import models.Careers;
-import models.Person;
-import models.Scene;
-import models.SceneContainer;
+import models.*;
+
 
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +28,15 @@ public class Game {
             runEffect(input, currentScene);
             displaySceneSummary();
             player.addAge(5);
+            String askToSave = "";
+            System.out.println("Do you want to save the game?(y/n)");
+            Scanner Console = new Scanner(System.in);
+            askToSave = Console.nextLine();
+            if(askToSave.equalsIgnoreCase("Y") == true)
+            {
+                WriteFile SaveGame = new WriteFile("src/main/java/models/saveFile.txt",displaySceneSummary());
+                SaveGame.save();
+            }
         }
         playAgainOrExit();
     }
@@ -37,7 +44,8 @@ public class Game {
     private void playAgainOrExit() {
     }
 
-    private void displaySceneSummary() {
+    private String displaySceneSummary() {
+        String values = "";
         System.out.println("++++++ 5-Year Summary ++++++");
         System.out.println("Player: " + player.getName());
         System.out.println("Net Worth: " + player.getPrettyNetWorth());
@@ -47,7 +55,16 @@ public class Game {
         }else{
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : player.getPartner()));
         }
-
+        values += ("++++++ 5-Year Summary ++++++");
+        values += ("\nPlayer: " + player.getName());
+        values += ("\nNet Worth: " + player.getPrettyNetWorth());
+        values += ("\nChildren: " + player.getChildren());
+        if(player.isMarried()){
+            values += ("\nSpouse: " + player.getPartner());
+        }else{
+            values += ("\nPartner: " + (player.getPartner() == null ? "none" : player.getPartner()));
+        }
+        return values;
     }
 
     private void runEffect(int index, Scene currentScene) {
@@ -113,11 +130,11 @@ public class Game {
 
         Scanner playerInput2 = new Scanner(System.in);
 
-        System.out.println("Do you want to go to college ? Y/N: ");
+        System.out.println("Do you want to go to college ? (Y/N): ");
         String educationChoice = playerInput2.nextLine();
 
 
-        System.out.println("Your name is " + playerName + ". You chose " + educationChoice + "for college. ");
+        System.out.println("Your name is " + playerName + ". \nYou chose " + educationChoice + " for college. ");
 
         Person p = new Person();
 
@@ -149,3 +166,5 @@ public class Game {
 
 
 }
+
+
