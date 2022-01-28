@@ -1,0 +1,52 @@
+{
+  "true": [
+    {
+      "prompt": "Your baby is having night terrors and keeps crying throughout the night. You are exhausted and have a big meeting tomorrow. What do you do?",
+      "options": [
+        "let her cry",
+        "soothe her"
+      ],
+      "outcomes": [
+        "'She has to learn to self-regulate', you think. You decide to let her cry and as a result, you are able to get a better sleep.  " ,
+        "You go to your baby and pick her up from the crib. You sigh knowing you will do terribly in your meeting tomorrow and it will affect your job performance."
+      ],
+      "effects": [
+        {
+          "money" : 5000,
+          "health" : 5,
+          "career" : 0
+        },
+        {
+          "money" : -5000,
+          "health" : -5,
+          "career" : 0
+        }
+      ]
+    }
+  ],
+  "false": [
+    {
+      "prompt": "You have been enjoying your child-free life. But recently, you've been thinking of adding a little one into your life. You know it was drastically change your current lifestyle. What do you do? ",
+      "options": [
+        "get baby",
+        "no baby"
+      ],
+      "outcomes": [
+        "You are ecstatic about your decision to have a baby. You know it will affect your finances and health but it will make you happy. Cooo cooo baby. ",
+        "You are content with your life. Now you can use the money you save on relaxing tropical adventures and focus on your daily yoga practice. "
+      ],
+      "effects": [
+        {
+          "money" : -100000,
+          "health" : -5,
+          "career" : 0
+        },
+        {
+          "money" : 100000,
+          "health" : 5,
+          "career" : 0
+        }
+      ]
+    }
+  ]
+}
