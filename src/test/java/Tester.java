@@ -5,7 +5,8 @@ public class Tester {
 
     @Test
     public void testWhatever() {
-        System.out.println(new Person().getHealthPoints());
+        new Person().addChild(3);
+        new Person().addChild(1);
 
     }
 

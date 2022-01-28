@@ -8,7 +8,7 @@ public class Person {
     private int netWorth = 0, health = 100, age = 18, children = 0;
     private final NumberFormat money = NumberFormat.getCurrencyInstance();
 
-    Boolean education = false, isMarried=false, hasPrivilege = false;
+    Boolean education = false, isMarried = false, hasPrivilege = false;
     Careers career = Careers.PASSION;
     Person partner = null;
     String name;
@@ -60,7 +60,8 @@ public class Person {
         health += value;
         if (health > 100)
             health = 100;
-        String msg = String.format("You have gained %d health", value);
+        String gained = value < 0 ? "lost" : "gained";
+        String msg = String.format("You have %s %d health", gained, value);
         System.out.println(msg);
 
     }
@@ -80,13 +81,19 @@ public class Person {
     }
 
     public void marryPartner(int value) {
-        System.out.println("Should marry partner and get dowry of " + value);
+        if (partner != null)
+            partner.setMarried(true);
+    }
 
+    private void setMarried(boolean b) {
+        this.isMarried = true;
     }
 
     public void addChild(int value) {
-        System.out.println("Should add children: " + value);
-
+        children += value;
+        String some = value > 1 ? "children" : "child";
+        String msg = String.format("You have gained %d %s", value, some);
+        System.out.println(msg);
     }
 
     public void changeCareer(int value) {
@@ -137,5 +144,9 @@ public class Person {
         final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.";
         System.out.println(msg);
 
+    }
+
+    public void setName(String playerName) {
+        this.name = playerName;
     }
 }
