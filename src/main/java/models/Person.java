@@ -9,7 +9,7 @@ public class Person {
     private int netWorth = 0, health = 100, age = 18, children = 0;
     private final NumberFormat money = NumberFormat.getCurrencyInstance();
 
-    Boolean education = false, isMarried=false;
+    Boolean education = false, isMarried=false, hasPrivilege = false;
     Careers career = Careers.PASSION;
     Person partner = null;
     String name;
@@ -40,7 +40,14 @@ public class Person {
     }
 
     public String getCategoryValue(int index) {
-        List<String> fieldValues = List.of(career.toString().toLowerCase(), education.toString());
+        List<String> fieldValues = List.of(
+                career.toString().toLowerCase(),
+                education.toString(),
+                Boolean.toString(partner == null),
+                hasPrivilege.toString(),
+                Boolean.toString(health > 50),
+                Boolean.toString(children > 0)
+        );
         return fieldValues.get(index);
     }
 
@@ -120,5 +127,9 @@ public class Person {
 
     public boolean isMarried() {
         return isMarried;
+    }
+
+    public void addSalary() {
+
     }
 }

@@ -9,20 +9,28 @@ public class SceneContainer {
 
     private final Random random = new Random();
 
-    Map<String, List<Scene>> education = new HashMap<>();
-    Map<String, List<Scene>> partner = new HashMap<>();
-    Map<String, List<Scene>> privilege = new HashMap<>();
-    Map<String, List<Scene>> children = new HashMap<>();
-    Map<String, List<Scene>> career = new HashMap<>();
-    Map<String, List<Scene>> health = new HashMap<>();
-    Map<String, List<Scene>> hobbies = new HashMap<>();
+    Map<String, List<Scene>> education;
+    Map<String, List<Scene>> partner;
+    Map<String, List<Scene>> privilege;
+    Map<String, List<Scene>> children;
+    Map<String, List<Scene>> career;
+    Map<String, List<Scene>> health;
     List<Map<String, List<Scene>>> categories = new ArrayList<>();
 
     public SceneContainer() {
         career = loadScenes("career", "danger", "knowledge", "passion");
         education = loadScenes("education", "true", "false");
+        partner = loadScenes("partner", "true", "false");
+        privilege = loadScenes("privilege", "true", "false");
+        children = loadScenes("children", "true", "false");
+        health = loadScenes("health", "true", "false");
+
         categories.add(career);
         categories.add(education);
+        categories.add(partner);
+        categories.add(privilege);
+        categories.add(health);
+        categories.add(children);
     }
 
     private Map<String, List<Scene>> loadScenes(String category, String... subcategories) {

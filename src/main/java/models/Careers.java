@@ -19,10 +19,11 @@ public enum Careers {
             PASSION, List.of("SCULPTOR", "MUSICIAN", "PERFORMER")
     );
 
-    public static Map<Careers, List<String>> getCollegeCareers(){
+    public static Map<Careers, List<String>> getCollegeCareers() {
         return collegeCareers;
     }
-    public static Map<Careers, List<String>> getNonCollegeCareers(){
+
+    public static Map<Careers, List<String>> getNonCollegeCareers() {
         return nonCollegeCareers;
     }
 
