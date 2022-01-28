@@ -13,13 +13,11 @@
       "effects": [
         {
           "money" : -50000,
-          "health" : 10,
-          "career" : 0
+          "health" : 10
         },
         {
           "money" : 300,
-          "health" : 1,
-          "career" : 0
+          "health" : 1
         }
       ]
     }

@@ -26,19 +26,22 @@ public class Game {
             int input = prompt(currentScene);
             displayOutcome(input, currentScene);
             runEffect(input, currentScene);
+            player.addSalary();
             displaySceneSummary();
             player.addAge(5);
-            String askToSave = "";
-            System.out.println("Do you want to save the game?(y/n)");
-            Scanner Console = new Scanner(System.in);
-            askToSave = Console.nextLine();
-            if(askToSave.equalsIgnoreCase("Y") == true)
-            {
-                WriteFile SaveGame = new WriteFile("src/main/java/models/saveFile.txt",displaySceneSummary());
-                SaveGame.save();
-            }
+            promptToSave();
+
         }
         playAgainOrExit();
+    }
+
+    private void promptToSave() {
+        System.out.println("Do you want to save the game?(y/n)");
+        String askToSave = getInput();
+        if (askToSave.equalsIgnoreCase("Y")) {
+            WriteFile saveGame = new WriteFile("src/main/java/models/saveFile.txt", displaySceneSummary());
+            saveGame.save();
+        }
     }
 
     private void playAgainOrExit() {
@@ -50,18 +53,18 @@ public class Game {
         System.out.println("Player: " + player.getName());
         System.out.println("Net Worth: " + player.getPrettyNetWorth());
         System.out.println("Children: " + player.getChildren());
-        if(player.isMarried()){
+        if (player.isMarried()) {
             System.out.println("Spouse: " + player.getPartner());
-        }else{
+        } else {
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : player.getPartner()));
         }
         values += ("++++++ 5-Year Summary ++++++");
         values += ("\nPlayer: " + player.getName());
         values += ("\nNet Worth: " + player.getPrettyNetWorth());
         values += ("\nChildren: " + player.getChildren());
-        if(player.isMarried()){
+        if (player.isMarried()) {
             values += ("\nSpouse: " + player.getPartner());
-        }else{
+        } else {
             values += ("\nPartner: " + (player.getPartner() == null ? "none" : player.getPartner()));
         }
         return values;

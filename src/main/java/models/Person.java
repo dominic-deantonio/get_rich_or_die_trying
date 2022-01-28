@@ -2,14 +2,13 @@ package models;
 
 import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class Person {
 
     private int netWorth = 0, health = 100, age = 18, children = 0;
     private final NumberFormat money = NumberFormat.getCurrencyInstance();
 
-    Boolean education = false, isMarried=false;
+    Boolean education = false, isMarried=false, hasPrivilege = false;
     Careers career = Careers.PASSION;
     Person partner = null;
     String name;
@@ -40,7 +39,14 @@ public class Person {
     }
 
     public String getCategoryValue(int index) {
-        List<String> fieldValues = List.of(career.toString().toLowerCase(), education.toString());
+        List<String> fieldValues = List.of(
+                career.toString().toLowerCase(),
+                education.toString(),
+                Boolean.toString(partner == null),
+                hasPrivilege.toString(),
+                Boolean.toString(health > 50),
+                Boolean.toString(children > 0)
+        );
         return fieldValues.get(index);
     }
 
@@ -120,5 +126,16 @@ public class Person {
 
     public boolean isMarried() {
         return isMarried;
+    }
+
+    public void addSalary() {
+        int amountToAdd = career.getSalaryAmount() * 5;
+        double educationMultiplier = hasEducation() ? 1.5 : 1;
+        int sum = (int) (amountToAdd * educationMultiplier);
+        netWorth = sum + netWorth;
+
+        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.";
+        System.out.println(msg);
+
     }
 }

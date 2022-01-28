@@ -14,12 +14,10 @@
         {
           "money" : -50000,
           "health" : 10,
-          "career" : 0
         },
         {
           "money" : -3000,
           "health" : -15,
-          "career" : 0
         }
       ]
     }
@@ -39,12 +37,10 @@
         {
           "money" : 20,
           "health" : -15,
-          "career" : 0
         },
         {
           "money" : 10,
           "health" : 25,
-          "career" : 0
         }
       ]
     }
