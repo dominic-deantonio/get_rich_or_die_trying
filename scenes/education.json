@@ -1,50 +1,45 @@
 {
   "true": [
     {
-      "prompt": "Ed-true One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "You are considering going back to college for an advanced degree. You visit a prospective university and meet with a guidance counselor. She says you will need some remedial math classes since they are a very selective university, but she can approve the application right now if you want.",
       "options": [
-        "ignore her",
-        "help her"
+        "get degree",
+        "no thanks"
       ],
       "outcomes": [
-        "'A case of the Mondays, huh?', you say to her. She glares and you continue to the restroom. On your way back to your desk, you find a credit card in the coffee stain. She must not have realized she dropped it.",
-        "You bend to help her pick up her items. 'Everything okay?', you ask. She sighs and reaches down for her mug. 'Ugh, just a case of the Mondays, I guess.' Your hands meet on the coffee mug."
+        "The extra math classes bring a ton of stress, but after a few years you finally finish your program and graduate. You are now extremely employable.",
+        "You decide to apply to a different university which does not require the remedial math classes. It was smooth sailing, and you are marginally more employable."
       ],
       "effects": [
         {
-          "money" : 500000,
-          "health" : 0,
-          "career" : 0
+          "health": -15,
+          "money": 90000
         },
         {
-          "money" : 500000,
-          "health" : 0,
-          "career" : 0
+          "health": 5,
+          "money": 30000
         }
       ]
     }
   ],
   "false": [
     {
-      "prompt": "Ed-false One day while in the office, you are heading to the restroom. You round a corner and bump into the new secretary. She drops the notepad and coffee mug she was holding onto the carpet, spilling coffee everywhere.",
+      "prompt": "Recent developments in technology are starting to render your job obsolete. A coworker approaches you to ask if you want to join 'The Anti-Automation League'. You have heard about the AAL in the news lately but can't remember exactly why.",
       "options": [
-        "ignore her",
-        "help her"
+        "join league",
+        "decline invitation"
       ],
       "outcomes": [
-        "'A case of the Mondays, huh?', you say to her. She glares and you continue to the restroom. On your way back to your desk, you find a credit card in the coffee stain. She must not have realized she dropped it.",
-        "You bend to help her pick up her items. 'Everything okay?', you ask. She sighs and reaches down for her mug. 'Ugh, just a case of the Mondays, I guess.' Your hands meet on the coffee mug."
+        "You join the AAL and learn of plans to bomb a robotics company. You are assigned as the getaway driver. The event goes smoothly and the robotics company is completely destroyed. While escaping, you hit a hard pothole at high speeds and the truck explodes. One of your team must have left an explosive in the truck bed. When the ambulance arrives, you pretend to be an innocent victim of the explosion.",
+        "You tell your coworker no thanks. A few weeks later, you see a news report that the AAL has bombed a robotics company. Your company's robotic workers are now at least three years delayed thanks to the AAL and the company has to pay out bonuses to keep their employees, including you."
       ],
       "effects": [
         {
-          "money" : 500000,
-          "health" : 0,
-          "career" : 0
+          "money": 150000,
+          "health": -40
         },
         {
-          "money" : 500000,
-          "health" : 0,
-          "career" : 0
+          "money": 50000
         }
       ]
     }
