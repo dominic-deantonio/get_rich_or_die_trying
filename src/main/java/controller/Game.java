@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class Game {
     SceneContainer scenes;
     Person player;
-//    String input = "";
-
+    boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     public void execute() {
+
         scenes = new SceneContainer();
         welcome();
         player = getPlayerBasicData();
@@ -22,19 +22,21 @@ public class Game {
         while (shouldPlay()) {
             clearScreen();
             Scene currentScene = scenes.getRandomScene(player);
+            System.out.println("+++++++ 5 years later +++++++");
+            player.addAge(5);
             int input = prompt(currentScene);
+            clearScreen();
             displayOutcome(input, currentScene);
             runEffect(input, currentScene);
             player.addSalary();
             displaySceneSummary();
-            player.addAge(5);
             nextTurnPrompt();
         }
         playAgainOrExit();
     }
 
     private void nextTurnPrompt() {
-        System.out.println("Enter any key to continue or type 'save' to save the game. Or 'quit' to end the game.");
+        System.out.println("\nEnter any key to continue or type 'save' to save the game. Or 'quit' to end the game.");
         String askToSave = getInput();
 
         if (askToSave.equalsIgnoreCase("quit")) {
@@ -51,9 +53,16 @@ public class Game {
     private void playAgainOrExit() {
     }
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+    public void clearScreen() {
+        try {
+            if (isWindows) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (Exception ignored) {
+            // Failed to clear the screen. Not much we can do about that.
+        }
     }
 
     private String displaySceneSummary() {
@@ -86,11 +95,13 @@ public class Game {
 
     private void displayOutcome(int index, Scene currentScene) {
         System.out.println(currentScene.outcomes.get(index));
+        System.out.println();
     }
 
     private int prompt(Scene currentScene) {
-        System.out.println("+++++++ 5 years later +++++++");
+        System.out.println();
         System.out.println(currentScene.prompt);
+        System.out.println();
         for (String option : currentScene.options)
             System.out.println(option);
 

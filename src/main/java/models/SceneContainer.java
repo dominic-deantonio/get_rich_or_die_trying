@@ -35,17 +35,16 @@ public class SceneContainer {
 
     private Map<String, List<Scene>> loadScenes(String category, String... subcategories) {
         JSONObject fileData = readJsonObject("scenes/" + category + ".json");
-        List<Scene> categoryScenes = new ArrayList<>();
-
         Map<String, List<Scene>> tempMap = new HashMap<>();
 
         for (String subcategory : subcategories) {
+            List<Scene> subCategoryScenes = new ArrayList<>();
             for (Object sceneObject : fileData.getJSONArray(subcategory)) {
                 JSONObject definitelyJson = (JSONObject) sceneObject;
                 Scene newScene = Scene.fromJson(definitelyJson);
-                categoryScenes.add(newScene);
+                subCategoryScenes.add(newScene);
             }
-            tempMap.put(subcategory, categoryScenes);
+            tempMap.put(subcategory, subCategoryScenes);
         }
 
         return tempMap;
@@ -68,10 +67,15 @@ public class SceneContainer {
 
     public Scene getRandomScene(Person player) {
         int categoryIndex = random.nextInt(categories.size()); // Get random number based on size of the categories
+//        System.out.println("Category index: " + categoryIndex);
         Map<String, List<Scene>> category = categories.get(categoryIndex); // Get the category of scenes (this is one of the vars defined above)
+//        System.out.println("Category: " + category);
         String subCategoryKey = player.getCategoryValue(categoryIndex); // Get the subcategory key (the value of the corresponding player variable)
+//        System.out.println("Subcategory: " + subCategoryKey);
         List<Scene> subCategoryScenes = category.get(subCategoryKey); // Get the list of scenes based on the subCategoryKey
+//        System.out.println("Subcat scenes: " + subCategoryScenes);
         int sceneIndex = random.nextInt(subCategoryScenes.size()); // Get a random index based on the subcategory size
+//        System.out.println("Scene index: " + sceneIndex);
         return subCategoryScenes.get(sceneIndex); // Get and return the randomly selected scene
     }
 }
