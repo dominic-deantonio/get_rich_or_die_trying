@@ -117,6 +117,9 @@ public class Person {
 
     public void addAge(int i) {
         age += i;
+        String plural = i == 1 ? "year has" : "years have";
+        String msg = String.format("%d %s passed. You are now %d years old.", i, plural, age);
+        System.out.println(msg);
     }
 
     public String getName() {
