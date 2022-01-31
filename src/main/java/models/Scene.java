@@ -30,8 +30,11 @@ public class Scene {
             outcomes.add(outcome.toString());
 
         List<Map<String, Object>> effects = new ArrayList<>();
-        for (Object effect : json.getJSONArray("effects"))
-            effects.add(((JSONObject) effect).toMap());
+
+        if(json.has("effects")) {
+            for (Object effect : json.getJSONArray("effects"))
+                effects.add(((JSONObject) effect).toMap());
+        }
 
         return new Scene(json.getString("prompt"), options, outcomes, effects);
     }

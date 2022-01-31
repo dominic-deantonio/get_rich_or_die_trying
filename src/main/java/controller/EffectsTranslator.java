@@ -42,6 +42,25 @@ public class EffectsTranslator {
         }
 
     }
+
+    public static void getAttribute(Person player, String attribute) {
+
+        switch (attribute) {
+            case "strength":
+                System.out.println(1);
+                break;
+            case "intellect":
+                System.out.println(1);
+                break;
+            case "creativity":
+                System.out.println(1);
+                break;
+            default:
+                System.out.println("some error occurred");
+                break;
+        }
+
+    }
 }
 
 

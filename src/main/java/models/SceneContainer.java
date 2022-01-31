@@ -50,7 +50,7 @@ public class SceneContainer {
         return tempMap;
     }
 
-    private static JSONObject readJsonObject(String path) {
+    public static JSONObject readJsonObject(String path) {
         File file = new File(path);
         StringBuilder jsonString = new StringBuilder("");
         try (Scanner reader = new Scanner(file)) {

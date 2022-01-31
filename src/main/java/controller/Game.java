@@ -1,7 +1,11 @@
 package controller;
 
 import models.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -150,10 +154,41 @@ public class Game {
         System.out.println("Enter your Name: ");
         String playerName = getInput();
 
+        List<Scene> backstories = getBackStoryScenes();
+        for(Scene backstory: backstories) {
+            System.out.println(backstory.prompt);
+            System.out.println();
+            System.out.println("Click any key to continue.");
+            getInput();
+            List<JSONObject> backstoryOptions = new ArrayList<>();
+
+            try {
+                for (String option : backstory.options) {
+                    JSONObject a1 = new JSONObject(option);
+                    backstoryOptions.add(a1);
+                    System.out.println(a1.keySet().toArray()[0]);
+
+                }
+            } catch(Exception e) {
+
+            }
+            String resp = getInput();
+            //To-do, validate input
+            for(JSONObject option : backstoryOptions) {
+                if(option.has(resp)) {
+                    String attribute = option.getString(resp);
+                    System.out.println(option.getString(resp));
+                    EffectsTranslator.getAttribute(player, attribute);
+                    break;
+                }
+            }
+
+        }
         System.out.println("Do you want to go to college ? (Y/N): ");
         String educationChoice = getInput();
 
         System.out.println("Your name is " + playerName + ". \nYou chose " + educationChoice + " for college. ");
+
 
         Person p = new Person();
         p.setName(playerName);
@@ -163,6 +198,30 @@ public class Game {
 
 
         return p;
+    }
+
+    private List<Scene> getBackStoryScenes() {
+        List<Scene> backstories = new ArrayList<>();
+        JSONArray fileData = readJsonArray("scenes/backstory.json");
+        for(Object jsonScene : fileData) {
+            Scene backstory = Scene.fromJson((JSONObject) jsonScene);
+            backstories.add(backstory);
+        }
+        return backstories;
+    }
+
+    private JSONArray readJsonArray(String path) {
+        File file = new File(path);
+        StringBuilder jsonString = new StringBuilder("");
+        try (Scanner reader = new Scanner(file)) {
+            while (reader.hasNextLine())
+                jsonString.append(reader.nextLine());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return new JSONArray(jsonString.toString());
     }
 
     private String welcome() {
