@@ -145,12 +145,49 @@ public class Person {
     public void addSalary() {
         int amountToAdd = career.getSalaryAmount() * 5;
         double educationMultiplier = hasEducation() ? 1.5 : 1;
-        int sum = (int) (amountToAdd * educationMultiplier);
+        double incomeMultiplier = getIncomeMultiplier();
+        int sum = (int) (amountToAdd * educationMultiplier * incomeMultiplier);
+
+
+        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job. " +
+                "\n Net worth breakdown: " +
+                "\n Base yearly salary: " + career.getSalaryAmount() +
+                "\n Yearly salary * 5 years: " + amountToAdd +
+                "\n Education Multiplier: " + educationMultiplier +
+                "\n Income Multiplier from " + getAttributeFromCareer() + ": " + incomeMultiplier +
+                "\n Total: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(getNetWorth());
+        System.out.println(msg);
         netWorth = sum + netWorth;
 
-        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.";
-        System.out.println(msg);
 
+    }
+
+    private String getAttributeFromCareer() {
+        switch (career) {
+            case DANGER:
+                return "strength";
+            case KNOWLEDGE:
+                return "intellect";
+            case PASSION:
+                return "creativity";
+            default:
+                return "none";
+        }
+    }
+
+    private double getIncomeMultiplier() {
+        //1 - 1.5
+
+        switch (career) {
+            case DANGER:
+                return (10.0 + strength)/10;
+            case KNOWLEDGE:
+                return (10.0 + intellect)/10;
+            case PASSION:
+                return (10.0 + creativity)/10;
+            default:
+                return 1;
+        }
     }
 
     public void setName(String playerName) {

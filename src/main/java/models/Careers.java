@@ -22,8 +22,8 @@ public enum Careers {
     );
 
     private static Map<Careers, Integer> salaries = Map.of(
-            DANGER, 50000,
-            KNOWLEDGE, 30000,
+            DANGER, 20000,
+            KNOWLEDGE, 15000,
             PASSION, 10000
     );
 
