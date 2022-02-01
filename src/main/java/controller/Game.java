@@ -5,21 +5,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     SceneContainer scenes;
-    Person player;
+    Person player = new Person();
     boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     public void execute() {
 
         scenes = new SceneContainer();
         welcome();
-        player = getPlayerBasicData();
+        getPlayerBasicData();
         clearScreen();
         runSceneOneCareer(player);
 
@@ -150,61 +147,59 @@ public class Game {
         return playerInput.nextLine();
     }
 
-    private Person getPlayerBasicData() {
+    private void getPlayerBasicData() {
         System.out.println("Enter your Name: ");
         String playerName = getInput();
-
-        List<Scene> backstories = getBackStoryScenes();
-        for(Scene backstory: backstories) {
-            System.out.println(backstory.prompt);
-            System.out.println();
-            System.out.println("Click any key to continue.");
-            getInput();
-            List<JSONObject> backstoryOptions = new ArrayList<>();
-
-            try {
-                for (String option : backstory.options) {
-                    JSONObject a1 = new JSONObject(option);
-                    backstoryOptions.add(a1);
-                    System.out.println(a1.keySet().toArray()[0]);
-
-                }
-            } catch(Exception e) {
-
-            }
-            String resp = getInput();
-            //To-do, validate input
-            for(JSONObject option : backstoryOptions) {
-                if(option.has(resp)) {
-                    String attribute = option.getString(resp);
-                    System.out.println(option.getString(resp));
-                    EffectsTranslator.getAttribute(player, attribute);
-                    break;
-                }
-            }
-
-        }
-        System.out.println("Do you want to go to college ? (Y/N): ");
+        clearScreen();
+        List<Backstory> backstories = getBackStoryScenes();
+        processBackstories(backstories);
+        System.out.println();
+        // TODO: Make this better narrative
+        System.out.println("Do you want to go to college? (Y/N): ");
         String educationChoice = getInput();
 
         System.out.println("Your name is " + playerName + ". \nYou chose " + educationChoice + " for college. ");
 
-
-        Person p = new Person();
-        p.setName(playerName);
+        player.setName(playerName);
 
         if (educationChoice.equalsIgnoreCase("y"))
-            p.setEducation(true);
-
-
-        return p;
+            player.setEducation(true);
     }
 
-    private List<Scene> getBackStoryScenes() {
-        List<Scene> backstories = new ArrayList<>();
+    private void processBackstories(List<Backstory> backstories) {
+        for (Backstory backstory : backstories) {
+            System.out.println(backstory.getPrompt());
+            System.out.println();
+
+            for (BackstoryOption option : backstory.getOptions())
+                System.out.println(option.text);
+
+            String resp = getInput();
+            BackstoryOption selectedBackstoryOption = null;
+            for (BackstoryOption option : backstory.getOptions()) {
+                if(option.text.equalsIgnoreCase(resp)){
+                    selectedBackstoryOption = option;
+                    break;
+                }
+            }
+            System.out.println();
+            System.out.println(selectedBackstoryOption.outcome);
+            EffectsTranslator.getAttribute(player, selectedBackstoryOption.attribute);
+            System.out.println("\nPress any key to continue");
+            getInput();
+            clearScreen();
+        }
+        System.out.println("Your character's stats:");
+        System.out.println("Strength: " + player.getStrength());
+        System.out.println("Intellect: " + player.getIntellect());
+        System.out.println("Creativity: " + player.getCreativity());
+    }
+
+    private List<Backstory> getBackStoryScenes() {
+        List<Backstory> backstories = new ArrayList<>();
         JSONArray fileData = readJsonArray("scenes/backstory.json");
-        for(Object jsonScene : fileData) {
-            Scene backstory = Scene.fromJson((JSONObject) jsonScene);
+        for (Object jsonBackstory : fileData) {
+            Backstory backstory = Backstory.fromJson((JSONObject) jsonBackstory);
             backstories.add(backstory);
         }
         return backstories;

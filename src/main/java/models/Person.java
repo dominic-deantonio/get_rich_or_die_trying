@@ -117,6 +117,10 @@ public class Person {
 
     public void addAge(int i) {
         age += i;
+
+        // if age > 50
+            // decrease health proportionally to age
+
         String plural = i == 1 ? "year has" : "years have";
         String msg = String.format("%d %s passed. You are now %d years old.", i, plural, age);
         System.out.println(msg);
@@ -151,5 +155,29 @@ public class Person {
 
     public void setName(String playerName) {
         this.name = playerName;
+    }
+
+    public void addCreativity(int i) {
+        this.creativity += i;
+    }
+
+    public void addIntellect(int i) {
+        this.intellect += i;
+    }
+
+    public void addStrength(int i) {
+        this.strength += i;
+    }
+
+    public int getStrength() {
+        return this.strength;
+    }
+
+    public int getIntellect() {
+        return this.intellect;
+    }
+
+    public int getCreativity() {
+        return this.creativity;
     }
 }

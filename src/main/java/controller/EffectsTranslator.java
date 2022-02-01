@@ -47,13 +47,13 @@ public class EffectsTranslator {
 
         switch (attribute) {
             case "strength":
-                System.out.println(1);
+                player.addStrength(1);
                 break;
             case "intellect":
-                System.out.println(1);
+                player.addIntellect(1);
                 break;
             case "creativity":
-                System.out.println(1);
+                player.addCreativity(1);
                 break;
             default:
                 System.out.println("some error occurred");
