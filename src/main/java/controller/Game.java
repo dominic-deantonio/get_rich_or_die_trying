@@ -70,6 +70,7 @@ public class Game {
         String values = "";
         System.out.println("\n++++++ 5-Year Summary ++++++");
         System.out.println("Player: " + player.getName());
+        System.out.println("Age: " + player.getAge());
         System.out.println("Net Worth: " + player.getPrettyNetWorth());
         System.out.println("Health: " + player.getHealthPoints());
         System.out.println("Children: " + player.getChildren());
@@ -239,7 +240,7 @@ public class Game {
 
     private boolean shouldPlay() {
         if (player.getHealthPoints() <= 0) {
-            System.out.println("Game Over. You ran out of health points: " + player.getHealthPoints());
+            System.out.println("Game Over. You died because you ran out of health points: " + player.getHealthPoints());
             return false;
         }
 

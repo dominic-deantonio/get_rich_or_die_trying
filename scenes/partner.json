@@ -58,7 +58,6 @@
       "effects": [
         {
           "money" : -5000,
-          "health" : -25,
           "dating": 1
         },
         {

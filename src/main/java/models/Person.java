@@ -2,6 +2,7 @@ package models;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Random;
 
 public class Person {
 
@@ -118,11 +119,14 @@ public class Person {
     public void addAge(int i) {
         age += i;
 
-        // if age > 50
-            // decrease health proportionally to age
+        if(age > 50){
+            Random rand = new Random();
+            int amountHealthToDecrease = -(rand.nextInt(15) + 1);
+            System.out.println("You are getting older and losing health.");
+            addHealth(amountHealthToDecrease);
+        }
 
-        String plural = i == 1 ? "year has" : "years have";
-        String msg = String.format("%d %s passed. You are now %d years old.", i, plural, age);
+        String msg = String.format("You are now %d years old.", age);
         System.out.println(msg);
     }
 
@@ -147,17 +151,17 @@ public class Person {
         double educationMultiplier = hasEducation() ? 1.5 : 1;
         double incomeMultiplier = getIncomeMultiplier();
         int sum = (int) (amountToAdd * educationMultiplier * incomeMultiplier);
-
-
-        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job. " +
-                "\n Net worth breakdown: " +
-                "\n Base yearly salary: " + career.getSalaryAmount() +
-                "\n Yearly salary * 5 years: " + amountToAdd +
-                "\n Education Multiplier: " + educationMultiplier +
-                "\n Income Multiplier from " + getAttributeFromCareer() + ": " + incomeMultiplier +
-                "\n Total: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(getNetWorth());
-        System.out.println(msg);
+        int oldNetWorth = netWorth;
         netWorth = sum + netWorth;
+        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.\n\n" +
+                "\nNet worth breakdown: " +
+                "\nBase yearly salary: " + career.getSalaryAmount() +
+                "\nYearly salary * 5 years: " + amountToAdd +
+                "\nEducation Multiplier: " + educationMultiplier +
+                "\nIncome Multiplier from " + getAttributeFromCareer() + ": " + incomeMultiplier +
+                "\nTotal: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(oldNetWorth) + "=" + money.format(netWorth);
+        System.out.println(msg);
+
 
 
     }
@@ -216,5 +220,9 @@ public class Person {
 
     public int getCreativity() {
         return this.creativity;
+    }
+
+    public int getAge() {
+        return this.age;
     }
 }
