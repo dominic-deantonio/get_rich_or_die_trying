@@ -42,7 +42,7 @@ public class Person {
         List<String> fieldValues = List.of(
                 career.toString().toLowerCase(),
                 education.toString(),
-                Boolean.toString(partner == null),
+                Boolean.toString(partner != null),
                 hasPrivilege.toString(),
                 Boolean.toString(health > 50),
                 Boolean.toString(children > 0)
@@ -68,7 +68,7 @@ public class Person {
 
     public void addPartner(int value) {
         if (partner == null)
-            partner = new Person("Janine", value);
+            partner = new Person("Sam", value);
 
         final String msg = String.format("You have a new partner named %s", partner.name);
         System.out.println(msg);

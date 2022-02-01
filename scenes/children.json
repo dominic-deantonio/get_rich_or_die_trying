@@ -36,7 +36,8 @@
       "effects": [
         {
           "money" : -100000,
-          "health" : -5
+          "health" : -5,
+          "addchild": 1
         },
         {
           "money" : 100000,

@@ -74,9 +74,9 @@ public class Game {
         System.out.println("Health: " + player.getHealthPoints());
         System.out.println("Children: " + player.getChildren());
         if (player.isMarried()) {
-            System.out.println("Spouse: " + player.getPartner());
+            System.out.println("Spouse: " + "Sam");
         } else {
-            System.out.println("Partner: " + (player.getPartner() == null ? "none" : player.getPartner()));
+            System.out.println("Partner: " + (player.getPartner() == null ? "none" : "Sam"));
         }
         values += ("++++++ 5-Year Summary ++++++");
         values += ("\nPlayer: " + player.getName());
