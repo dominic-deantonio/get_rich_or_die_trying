@@ -17,32 +17,30 @@
         },
         {
           "money" : 300,
-          "health" : 1
+          "health" : 11
         }
       ]
     }
   ],
   "false": [
     {
-      "prompt": "Sample Promp ",
+      "prompt": "You are the only person who has never caught Covid",
       "options": [
-        "sample ab",
-        "sample bc"
+        "leap for joy",
+        "keep info to yourself"
       ],
       "outcomes": [
-        "sample outcome 11",
-        "sample outcome 21 "
+        "As you were leaping, you leaped into a pile of money. Its your lucky day.",
+        "You go on tour in your 60s and tell children at the library how you dodged Covid.You continue to take your vitamins and never catch the infamous bug."
       ],
       "effects": [
         {
-          "money" : 20,
-          "health" : -15,
-          "career" : 0
+          "money" : 5000,
+          "health" : 15
         },
         {
           "money" : 10,
-          "health" : 25,
-          "career" : 0
+          "health" : 25
         }
       ]
     }

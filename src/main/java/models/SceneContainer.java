@@ -9,13 +9,8 @@ public class SceneContainer {
 
     private final Random random = new Random();
 
-    Map<String, List<Scene>> education;
-    Map<String, List<Scene>> partner;
-    Map<String, List<Scene>> privilege;
-    Map<String, List<Scene>> children;
-    Map<String, List<Scene>> career;
-    Map<String, List<Scene>> health;
-    List<Map<String, List<Scene>>> categories = new ArrayList<>();
+    private final Map<String, List<Scene>> education,partner,privilege,children,career,health;
+    private final List<Map<String, List<Scene>>> categories = new ArrayList<>();
 
     public SceneContainer() {
         career = loadScenes("career", "danger", "knowledge", "passion");
@@ -35,31 +30,30 @@ public class SceneContainer {
 
     private Map<String, List<Scene>> loadScenes(String category, String... subcategories) {
         JSONObject fileData = readJsonObject("scenes/" + category + ".json");
-        List<Scene> categoryScenes = new ArrayList<>();
-
         Map<String, List<Scene>> tempMap = new HashMap<>();
 
         for (String subcategory : subcategories) {
+            List<Scene> subCategoryScenes = new ArrayList<>();
             for (Object sceneObject : fileData.getJSONArray(subcategory)) {
                 JSONObject definitelyJson = (JSONObject) sceneObject;
                 Scene newScene = Scene.fromJson(definitelyJson);
-                categoryScenes.add(newScene);
+                subCategoryScenes.add(newScene);
             }
-            tempMap.put(subcategory, categoryScenes);
+            tempMap.put(subcategory, subCategoryScenes);
         }
 
         return tempMap;
     }
 
-    private static JSONObject readJsonObject(String path) {
+    public static JSONObject readJsonObject(String path) {
         File file = new File(path);
-        StringBuilder jsonString = new StringBuilder("");
+        StringBuilder jsonString = new StringBuilder();
         try (Scanner reader = new Scanner(file)) {
             while (reader.hasNextLine())
                 jsonString.append(reader.nextLine());
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error occurred while loading scenes: " + e);
         }
 
         return new JSONObject(jsonString.toString());
