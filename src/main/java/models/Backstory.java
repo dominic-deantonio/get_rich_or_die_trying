@@ -41,6 +41,14 @@ public class Backstory {
         return options;
     }
 
+    public List<String> getBackstoryOptionsText(){
+        List<String> optionsText = new ArrayList<>();
+        for(BackstoryOption o : options)
+            optionsText.add(o.getText());
+
+        return optionsText;
+    }
+
     public String getPrompt() {
         return prompt;
     }

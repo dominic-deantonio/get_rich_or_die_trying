@@ -7,11 +7,26 @@ import java.util.List;
 import java.util.Map;
 
 public class Scene {
+    private final String prompt;
+    private final List<String> options, outcomes;
+    private final List<Map<String, Object>> effects;
 
-    public String prompt;
-    public List<String> options;
-    public List<String> outcomes;
-    public List<Map<String, Object>> effects;
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public List<String> getOutcomes() {
+        return outcomes;
+    }
+
+    public List<Map<String, Object>> getEffects() {
+        return effects;
+    }
+
 
     public Scene(String prompt, List<String> options, List<String> outcomes, List<Map<String, Object>> effects) {
         this.prompt = prompt;
@@ -31,7 +46,7 @@ public class Scene {
 
         List<Map<String, Object>> effects = new ArrayList<>();
 
-        if(json.has("effects")) {
+        if (json.has("effects")) {
             for (Object effect : json.getJSONArray("effects"))
                 effects.add(((JSONObject) effect).toMap());
         }

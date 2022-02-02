@@ -5,7 +5,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class Game {
@@ -24,8 +23,7 @@ public class Game {
         while (shouldPlay()) {
             clearScreen();
             Scene currentScene = scenes.getRandomScene(player);
-            System.out.println("\n" +
-                    "+++++++ 5 years later +++++++");
+            System.out.println("\n+++++++ 5 years later +++++++");
             player.addAge(5);
             int input = prompt(currentScene);
             clearScreen();
@@ -77,10 +75,13 @@ public class Game {
         System.out.println("Health: " + player.getHealthPoints());
         System.out.println("Children: " + player.getChildren());
         if (player.isMarried()) {
-            System.out.println("Spouse: " + "Sam");
+            System.out.println("Spouse: Sam");
         } else {
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : "Sam"));
         }
+
+        // This is currently being used to output the summary.
+        // This can go away when serialization is implemented
         values += ("++++++ 5-Year Summary ++++++");
         values += ("\nPlayer: " + player.getName());
         values += ("\nNet Worth: " + player.getPrettyNetWorth());
@@ -94,26 +95,23 @@ public class Game {
     }
 
     private void runEffect(int index, Scene currentScene) {
-        EffectsTranslator.doEffects(player, currentScene.effects.get(index));
+        EffectsTranslator.doEffects(player, currentScene.getEffects().get(index));
     }
 
     private void displayOutcome(int index, Scene currentScene) {
-        System.out.println(currentScene.outcomes.get(index));
+        System.out.println(currentScene.getEffects().get(index));
         System.out.println();
     }
 
     private int prompt(Scene currentScene) {
         System.out.println();
-        System.out.println(currentScene.prompt);
+        System.out.println(currentScene.getPrompt());
         System.out.println();
-        for (String option : currentScene.options)
+        for (String option : currentScene.getOptions())
             System.out.println(option);
 
-        String input = getInput();
-
-        // TODO: We have to validate the input
-        // TODO: Think about capitalization
-        return currentScene.options.indexOf(input.toLowerCase());
+        String input = getInput(currentScene.getOptions());
+        return currentScene.getOptions().indexOf(input.toLowerCase());
     }
 
     private void runSceneOneCareer(Person player) {
@@ -123,18 +121,20 @@ public class Game {
         System.out.println(collegeSummary);
         System.out.println("What career do you want?");
 
+        List<String> allValidCareers = new ArrayList<>();
         for (Careers career : availCareers.keySet()) {
             for (String specialty : availCareers.get(career)) {
                 System.out.println(specialty);
+                allValidCareers.add(specialty);
             }
         }
 
-        String input = getInput();
+        String selectedCareer = getInput(allValidCareers);
 
         topLoop:
         for (Careers career : availCareers.keySet()) {
             for (String specialty : availCareers.get(career)) {
-                if (input.equalsIgnoreCase(specialty)) {
+                if (selectedCareer.equalsIgnoreCase(specialty)) {
                     player.setCareer(career);
                     break topLoop;
                 }
@@ -142,38 +142,65 @@ public class Game {
         }
 
         System.out.println("\n" +
-                "You chose a job from this field : " + player.getCareer ());
+                "You chose a job from this field : " + player.getCareer());
 
     }
 
-    private String getInput() {
-        Scanner playerInput = new Scanner(System.in);
-        String getResponse = playerInput.nextLine();
-        if(getResponse.equalsIgnoreCase("Help") == true)
-        {
-            this.helpMenu();
+    private String getInput(Collection<String> options) {
+        String[] optionsArray = options.toArray(new String[0]);
+        return getInput(optionsArray);
+    }
+
+    /**
+     * Gets the user input
+     *
+     * @param selections a list of valid selections
+     * @return lower case version of user input
+     */
+    private String getInput(String... selections) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            String userInput = scanner.nextLine().trim().toLowerCase();
+
+            if (userInput.equalsIgnoreCase("Help"))
+                this.helpMenu();
+
+            if (userInput.equalsIgnoreCase("quit")) {
+                System.out.println("Quitting game");
+                System.exit(1);
+                return "";
+            }
+
+            if (selections.length == 0)
+                return userInput;
+
+            for (String selection : selections)
+                if (userInput.equalsIgnoreCase(selection))
+                    return userInput;
+
+            System.out.println("\nInvalid input. Valid options are:\n");
+
+            for (String selection : selections)
+                System.out.println(selection);
         }
-        return getResponse;
     }
 
     private void getPlayerBasicData() {
         System.out.println("Enter your Name: ");
         String playerName = getInput();
 
-        System.out.println("Select your privilege status (Low Class)/(Middle Class): ");
-        String getChoice = getInput();
-        if (getChoice.contains("Low") || getChoice.contains("low"))
-        {
-            this.player.setNetWorth(player.getNetWorth()-25000);
+        System.out.println("Select your privilege status (Working Class)/(Middle Class): ");
+        String getChoice = getInput("working class", "middle class");
+
+        if (getChoice.equalsIgnoreCase("working class")) {
+            this.player.setNetWorth(player.getNetWorth() - 25000);
+        } else if (getChoice.contains("middle class")) {
+            this.player.setNetWorth(player.getNetWorth() + 25000);
         }
-        else if (getChoice.contains("Middle") || getChoice.contains("middle"))
-        {
-            this.player.setNetWorth(player.getNetWorth()+25000);
-        }
-        System.out.println("You chose : " + getChoice + "\n" +
-                "You're Net Worth is : " + player.getNetWorth()  +
-                "\n " +
-                "\n" );
+        System.out.println("" +
+                "You chose: " + getChoice + "\n" +
+                "Your Net Worth is: " + player.getNetWorth() + "\n\n");
 
         clearScreen();
         List<Backstory> backstories = getBackStoryScenes();
@@ -181,14 +208,13 @@ public class Game {
         System.out.println();
         // TODO: Make this better narrative
         System.out.println("Do you want to go to college? (Y/N): ");
-        String educationChoice = getInput();
+        String educationChoice = getInput("y", "n");
 
-        System.out.println("Your name is " + playerName + ". \nYou chose " + educationChoice + " for college. ");
+        boolean userWantsCollege = educationChoice.equalsIgnoreCase("y");
+        System.out.printf("Your name is %s. You chose to %s college.", playerName, userWantsCollege ? "go to" : "skip");
 
         player.setName(playerName);
-
-        if (educationChoice.equalsIgnoreCase("y"))
-            player.setEducation(true);
+        player.setEducation(userWantsCollege);
     }
 
     private void processBackstories(List<Backstory> backstories) {
@@ -197,19 +223,19 @@ public class Game {
             System.out.println();
 
             for (BackstoryOption option : backstory.getOptions())
-                System.out.println(option.text);
+                System.out.println(option.getText());
 
-            String resp = getInput();
+            String resp = getInput(backstory.getBackstoryOptionsText());
             BackstoryOption selectedBackstoryOption = null;
             for (BackstoryOption option : backstory.getOptions()) {
-                if(option.text.contains(resp)){
+                if (option.getText().contains(resp)) {
                     selectedBackstoryOption = option;
                     break;
                 }
             }
             System.out.println();
-            System.out.println(selectedBackstoryOption.outcome);
-            EffectsTranslator.getAttribute(player, selectedBackstoryOption.attribute);
+            System.out.println(selectedBackstoryOption.getOutcome());
+            EffectsTranslator.getAttribute(player, selectedBackstoryOption.getAttribute());
             System.out.println("\nPress any key to continue or help for additional instructions");
             getInput();
             clearScreen();
@@ -232,7 +258,7 @@ public class Game {
 
     private JSONArray readJsonArray(String path) {
         File file = new File(path);
-        StringBuilder jsonString = new StringBuilder("");
+        StringBuilder jsonString = new StringBuilder();
         try (Scanner reader = new Scanner(file)) {
             while (reader.hasNextLine())
                 jsonString.append(reader.nextLine());
@@ -284,12 +310,9 @@ public class Game {
                 "\nbut skipping college will start you out with less debt." +
                 "\nChoose carefully, your life depends on it" +
                 "\nIf you're done with the help section, press any key to continue.");
-        try
-        {
+        try {
             System.in.read();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

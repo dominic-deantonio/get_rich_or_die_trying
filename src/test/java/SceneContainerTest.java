@@ -13,7 +13,7 @@ public class SceneContainerTest {
         player.setEducation(true);
         System.out.println("Children: " + player.getChildren());
         Scene scene = new SceneContainer().getRandomScene(player);
-        System.out.println(scene.prompt);
+        System.out.println(scene.getPrompt());
     }
 
     @Test

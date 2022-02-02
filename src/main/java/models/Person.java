@@ -9,10 +9,10 @@ public class Person {
     private int netWorth = 0, health = 100, age = 18, children = 0;
     private final NumberFormat money = NumberFormat.getCurrencyInstance();
     private int strength = 0, intellect = 0, creativity = 0;
-    Boolean education = false, isMarried = false, hasPrivilege = false;
-    Careers career = Careers.PASSION;
-    Person partner = null;
-    String name;
+    private Boolean education = false, isMarried = false, hasPrivilege = false;
+    private Careers career = Careers.PASSION;
+    private Person partner = null;
+    private String name;
 
     public Person() {
         money.setMaximumFractionDigits(0);
