@@ -24,7 +24,8 @@ public class Game {
         while (shouldPlay()) {
             clearScreen();
             Scene currentScene = scenes.getRandomScene(player);
-            System.out.println("+++++++ 5 years later +++++++");
+            System.out.println("\n" +
+                    "+++++++ 5 years later +++++++");
             player.addAge(5);
             int input = prompt(currentScene);
             clearScreen();
@@ -56,9 +57,7 @@ public class Game {
     }
 
     public void clearScreen() {
-        System.out.println("\033[H\033[2J");
-        System.out.flush();
-        /*try {
+        try {
             if (isWindows) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             } else {
@@ -66,7 +65,7 @@ public class Game {
             }
         } catch (Exception ignored) {
             // Failed to clear the screen. Not much we can do about that.
-        }*/
+        }
     }
 
     private String displaySceneSummary() {
@@ -142,7 +141,8 @@ public class Game {
             }
         }
 
-        System.out.println(player.getCareer());
+        System.out.println("\n" +
+                "You chose a job from this field : " + player.getCareer ());
 
     }
 
@@ -160,7 +160,7 @@ public class Game {
         System.out.println("Enter your Name: ");
         String playerName = getInput();
 
-        System.out.println("Select your privilege status (Low Class)  (Middle Class): ");
+        System.out.println("Select your privilege status (Low Class)/(Middle Class): ");
         String getChoice = getInput();
         if (getChoice.contains("Low") || getChoice.contains("low"))
         {
@@ -170,6 +170,10 @@ public class Game {
         {
             this.player.setNetWorth(player.getNetWorth()+25000);
         }
+        System.out.println("You chose : " + getChoice + "\n" +
+                "You're Net Worth is : " + player.getNetWorth()  +
+                "\n " +
+                "\n" );
 
         clearScreen();
         List<Backstory> backstories = getBackStoryScenes();
@@ -274,9 +278,11 @@ public class Game {
 
     public void helpMenu() {
         System.out.println("Game is meant to simulate life." +
-                "\nChoices will change how much money you have." +
-                "\nEx: choosing to be a doctor will grant you an extra $50,000 to your bank" +
-                "\nbut skipping college will only afford you a $20,000 salary." +
+                "\nThe intent of the game is to have 1 million dollars by the end of the game" +
+                "\nChoices will change how much money you have, as well as health points." +
+                "\nEx: choosing education will grant you an extra money to your salary" +
+                "\nbut skipping college will start you out with less debt." +
+                "\nChoose carefully, your life depends on it" +
                 "\nIf you're done with the help section, press any key to continue.");
         try
         {
