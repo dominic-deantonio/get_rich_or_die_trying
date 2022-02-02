@@ -99,7 +99,7 @@ public class Game {
     }
 
     private void displayOutcome(int index, Scene currentScene) {
-        System.out.println(currentScene.getEffects().get(index));
+        System.out.println(currentScene.getOutcomes().get(index));
         System.out.println();
     }
 
