@@ -31,6 +31,8 @@ public class Person {
         return netWorth;
     }
 
+    public void setNetWorth(int netWorth) {this.netWorth = netWorth;}
+
     public String getPrettyNetWorth() {
         return money.format(netWorth);
     }

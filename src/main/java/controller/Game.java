@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Game {
@@ -55,7 +56,9 @@ public class Game {
     }
 
     public void clearScreen() {
-        try {
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+        /*try {
             if (isWindows) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             } else {
@@ -63,7 +66,7 @@ public class Game {
             }
         } catch (Exception ignored) {
             // Failed to clear the screen. Not much we can do about that.
-        }
+        }*/
     }
 
     private String displaySceneSummary() {
@@ -145,12 +148,29 @@ public class Game {
 
     private String getInput() {
         Scanner playerInput = new Scanner(System.in);
-        return playerInput.nextLine();
+        String getResponse = playerInput.nextLine();
+        if(getResponse.equalsIgnoreCase("Help") == true)
+        {
+            this.helpMenu();
+        }
+        return getResponse;
     }
 
     private void getPlayerBasicData() {
         System.out.println("Enter your Name: ");
         String playerName = getInput();
+
+        System.out.println("Select your privilege status (Low Class)  (Middle Class): ");
+        String getChoice = getInput();
+        if (getChoice.contains("Low") || getChoice.contains("low"))
+        {
+            this.player.setNetWorth(player.getNetWorth()-25000);
+        }
+        else if (getChoice.contains("Middle") || getChoice.contains("middle"))
+        {
+            this.player.setNetWorth(player.getNetWorth()+25000);
+        }
+
         clearScreen();
         List<Backstory> backstories = getBackStoryScenes();
         processBackstories(backstories);
@@ -178,7 +198,7 @@ public class Game {
             String resp = getInput();
             BackstoryOption selectedBackstoryOption = null;
             for (BackstoryOption option : backstory.getOptions()) {
-                if(option.text.equalsIgnoreCase(resp)){
+                if(option.text.contains(resp)){
                     selectedBackstoryOption = option;
                     break;
                 }
@@ -186,7 +206,7 @@ public class Game {
             System.out.println();
             System.out.println(selectedBackstoryOption.outcome);
             EffectsTranslator.getAttribute(player, selectedBackstoryOption.attribute);
-            System.out.println("\nPress any key to continue");
+            System.out.println("\nPress any key to continue or help for additional instructions");
             getInput();
             clearScreen();
         }
@@ -250,6 +270,24 @@ public class Game {
         }
 
         return true;
+    }
+
+    public void helpMenu() {
+        System.out.println("Game is meant to simulate life." +
+                "\nChoices will change how much money you have." +
+                "\nEx: choosing to be a doctor will grant you an extra $50,000 to your bank" +
+                "\nbut skipping college will only afford you a $20,000 salary." +
+                "\nIf you're done with the help section, press any key to continue.");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
 
