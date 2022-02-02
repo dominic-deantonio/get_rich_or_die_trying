@@ -13,16 +13,15 @@
       "effects": [
         {
           "money" : -50000,
-          "health" : 10
+          "health" : 10,
+          "marry": 1
         },
         {
           "money" : -3000,
           "health" : -15
         }
       ]
-    }
-  ],
-  "false": [
+    },
     {
       "prompt": "You go to your partner to build an addition onto your house. Your partner tells you to wait until next year, but the time to build is now. You decide to go to the bank anyways and check your account. To your surprise, your partner has put all of the money into forex. ",
       "options": [
@@ -44,5 +43,29 @@
         }
       ]
     }
+  ],
+  "false": [
+    {
+      "prompt": "You're at a NYE party and the countdown to midnight is approaching. You are feeling nervous because you have no partner to kiss. Suddenly, you lock eyes with a mysterious wide-eye stranger.  'OoOoOo I like,' you think. What do you do? ",
+      "options": [
+        "kiss them",
+        "stare longingly"
+      ],
+      "outcomes": [
+        "Wow, what a magical kiss. The honeymoon stage begins. You cannot believe your luck. Sam is an incredibly kisser who also enjoys anime like you. You ask them to be your partner and they accept.",
+        "You are too shy to approach the stranger. You are feeling self-conscious because you have been dancing all night and have pit stains. You quietly leave into the night...wondering if you will ever fine romance. Sigh. "
+      ],
+      "effects": [
+        {
+          "money" : -5000,
+          "dating": 1
+        },
+        {
+          "money" : -10000,
+          "health" : -10
+        }
+      ]
+    }
+
   ]
 }

@@ -2,16 +2,17 @@ package models;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Random;
 
 public class Person {
 
     private int netWorth = 0, health = 100, age = 18, children = 0;
     private final NumberFormat money = NumberFormat.getCurrencyInstance();
-
-    Boolean education = false, isMarried = false, hasPrivilege = false;
-    Careers career = Careers.PASSION;
-    Person partner = null;
-    String name;
+    private int strength = 0, intellect = 0, creativity = 0;
+    private Boolean education = false, isMarried = false, hasPrivilege = false;
+    private Careers career = Careers.PASSION;
+    private Person partner = null;
+    private String name;
 
     public Person() {
         money.setMaximumFractionDigits(0);
@@ -30,6 +31,8 @@ public class Person {
         return netWorth;
     }
 
+    public void setNetWorth(int netWorth) {this.netWorth = netWorth;}
+
     public String getPrettyNetWorth() {
         return money.format(netWorth);
     }
@@ -42,7 +45,7 @@ public class Person {
         List<String> fieldValues = List.of(
                 career.toString().toLowerCase(),
                 education.toString(),
-                Boolean.toString(partner == null),
+                Boolean.toString(partner != null),
                 hasPrivilege.toString(),
                 Boolean.toString(health > 50),
                 Boolean.toString(children > 0)
@@ -68,7 +71,7 @@ public class Person {
 
     public void addPartner(int value) {
         if (partner == null)
-            partner = new Person("Janine", value);
+            partner = new Person("Sam", value);
 
         final String msg = String.format("You have a new partner named %s", partner.name);
         System.out.println(msg);
@@ -117,8 +120,15 @@ public class Person {
 
     public void addAge(int i) {
         age += i;
-        String plural = i == 1 ? "year has" : "years have";
-        String msg = String.format("%d %s passed. You are now %d years old.", i, plural, age);
+
+        if(age > 50){
+            Random rand = new Random();
+            int amountHealthToDecrease = -(rand.nextInt(15) + 1);
+            System.out.println("You are getting older and losing health.");
+            addHealth(amountHealthToDecrease);
+        }
+
+        String msg = String.format("You are now %d years old.", age);
         System.out.println(msg);
     }
 
@@ -141,15 +151,80 @@ public class Person {
     public void addSalary() {
         int amountToAdd = career.getSalaryAmount() * 5;
         double educationMultiplier = hasEducation() ? 1.5 : 1;
-        int sum = (int) (amountToAdd * educationMultiplier);
+        double incomeMultiplier = getIncomeMultiplier();
+        int sum = (int) (amountToAdd * educationMultiplier * incomeMultiplier);
+        int oldNetWorth = netWorth;
         netWorth = sum + netWorth;
-
-        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.";
+        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.\n\n" +
+                "\nNet worth breakdown: " +
+                "\nBase yearly salary: " + career.getSalaryAmount() +
+                "\nYearly salary * 5 years: " + amountToAdd +
+                "\nEducation Multiplier: " + educationMultiplier +
+                "\nIncome Multiplier from " + getAttributeFromCareer() + ": " + incomeMultiplier +
+                "\nTotal: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(oldNetWorth) + "=" + money.format(netWorth);
         System.out.println(msg);
 
+
+
+    }
+
+    private String getAttributeFromCareer() {
+        switch (career) {
+            case DANGER:
+                return "strength";
+            case KNOWLEDGE:
+                return "intellect";
+            case PASSION:
+                return "creativity";
+            default:
+                return "none";
+        }
+    }
+
+    private double getIncomeMultiplier() {
+        //1 - 1.5
+
+        switch (career) {
+            case DANGER:
+                return (10.0 + strength)/10;
+            case KNOWLEDGE:
+                return (10.0 + intellect)/10;
+            case PASSION:
+                return (10.0 + creativity)/10;
+            default:
+                return 1;
+        }
     }
 
     public void setName(String playerName) {
         this.name = playerName;
+    }
+
+    public void addCreativity(int i) {
+        this.creativity += i;
+    }
+
+    public void addIntellect(int i) {
+        this.intellect += i;
+    }
+
+    public void addStrength(int i) {
+        this.strength += i;
+    }
+
+    public int getStrength() {
+        return this.strength;
+    }
+
+    public int getIntellect() {
+        return this.intellect;
+    }
+
+    public int getCreativity() {
+        return this.creativity;
+    }
+
+    public int getAge() {
+        return this.age;
     }
 }

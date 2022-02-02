@@ -24,8 +24,14 @@ public class testerAnvy {
     public void salary() {
         player.setCareer(Careers.DANGER);
         player.setEducation(true);
+        player.addStrength(4);
         player.addSalary();
     }
 
+    @Test
+    public void incomeMultiplier() {
+        player.addCreativity(2);
+        //System.out.println(player.getIncomeMultiplier());
+    }
 
 }

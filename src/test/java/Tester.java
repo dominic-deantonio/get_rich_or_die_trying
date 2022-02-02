@@ -5,8 +5,10 @@ public class Tester {
 
     @Test
     public void testWhatever() {
-        new Person().addChild(3);
-        new Person().addChild(1);
+        Person p = new Person();
+        for(int i = 0 ; i < 20; i++){
+            p.addAge(5);
+        }
 
     }
 
