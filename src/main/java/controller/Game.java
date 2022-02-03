@@ -23,6 +23,7 @@ public class Game {
         while (shouldPlay()) {
             clearScreen();
             Scene currentScene = scenes.getRandomScene(player);
+            System.out.println(currentScene.getArt());
             System.out.println("\n+++++++ 5 years later +++++++");
             player.addAge(5);
             int input = prompt(currentScene);
@@ -187,6 +188,8 @@ public class Game {
     }
 
     private void getPlayerBasicData() {
+        String printBackstoryArt = Art.getArt("backstory");
+        System.out.println(printBackstoryArt);
         System.out.println("Enter your Name: ");
         String playerName = getInput();
 
@@ -203,6 +206,8 @@ public class Game {
                 "Your Net Worth is: " + player.getNetWorth() + "\n\n");
 
         clearScreen();
+
+        System.out.println(printBackstoryArt);
         List<Backstory> backstories = getBackStoryScenes();
         processBackstories(backstories);
         System.out.println();
