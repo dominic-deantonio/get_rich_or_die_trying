@@ -53,11 +53,9 @@ public class Person {
         return fieldValues.get(index);
     }
 
-    public void addMoney(int amountToAdd) {
-        double randModifier = new Random().nextDouble() * (1.25d - .75d) + .75d;
-        int modifiedAmountToAdd = (int) (amountToAdd * randModifier);
-        netWorth += modifiedAmountToAdd;
-        final String msg = String.format("You have %s %s from your choice", (amountToAdd < 0 ? "lost" : "gained"),   money.format(modifiedAmountToAdd));
+    public void addMoney(int value) {
+        netWorth += value;
+        final String msg = String.format("You have %s %s", (value < 0 ? "lost" : "gained"), money.format(value));
         System.out.println(msg);
     }
 
@@ -150,22 +148,21 @@ public class Person {
         return isMarried;
     }
 
-    public String addSalary() {
+    public void addSalary() {
         int amountToAdd = career.getSalaryAmount() * 5;
         double educationMultiplier = hasEducation() ? 1.5 : 1;
         double incomeMultiplier = getIncomeMultiplier();
         int sum = (int) (amountToAdd * educationMultiplier * incomeMultiplier);
         int oldNetWorth = netWorth;
         netWorth = sum + netWorth;
-        String netWorthSummary = "Your current net worth: " + money.format(netWorth);
-        System.out.println(netWorthSummary);
-        return "\nYou have earned " + money.format(sum) + " in the last 5 years from your job.\n" +
+        final String msg = "You have earned " + money.format(sum) + " in the last 5 years from your job.\n\n" +
                 "\nNet worth breakdown: " +
                 "\nBase yearly salary: " + career.getSalaryAmount() +
                 "\nYearly salary * 5 years: " + amountToAdd +
                 "\nEducation Multiplier: " + educationMultiplier +
                 "\nIncome Multiplier from " + getAttributeFromCareer() + ": " + incomeMultiplier +
                 "\nTotal: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(oldNetWorth) + "=" + money.format(netWorth);
+        System.out.println(msg);
 
 
 
@@ -229,9 +226,5 @@ public class Person {
 
     public int getAge() {
         return this.age;
-    }
-
-    public void setPrivilege(boolean b) {
-        this.hasPrivilege = b;
     }
 }
