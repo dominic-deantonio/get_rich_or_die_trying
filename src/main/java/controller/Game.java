@@ -30,8 +30,10 @@ public class Game {
             clearScreen();
             displayOutcome(input, currentScene);
             runEffect(input, currentScene);
-            player.addSalary();
-            displaySceneSummary();
+            String salaryReport = player.addSalary();
+            System.out.println("\nEnter any key to see your 5-year summary");
+            getInput();
+            displaySceneSummary(salaryReport);
             nextTurnPrompt();
         }
         playAgainOrExit();
@@ -47,13 +49,14 @@ public class Game {
         }
 
         if (askToSave.equalsIgnoreCase("save")) {
-            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary());
+            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
             saveGame.save();
         }
     }
 
     private void playAgainOrExit() {
     }
+
     //doesn't clear the scroll bar
     public void clearScreen() {
         try {
@@ -67,7 +70,7 @@ public class Game {
         }
     }
 
-    private String displaySceneSummary() {
+    private String displaySceneSummary(String salaryBreakdown) {
         String values = "";
         System.out.println("\n++++++ 5-Year Summary ++++++");
         System.out.println("Player: " + player.getName());
@@ -80,7 +83,7 @@ public class Game {
         } else {
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : "Sam"));
         }
-
+        System.out.println(salaryBreakdown);
         // This is currently being used to output the summary.
         // This can go away when serialization is implemented
         values += ("++++++ 5-Year Summary ++++++");
@@ -142,8 +145,7 @@ public class Game {
             }
         }
 
-        System.out.println("\n" +
-                "You chose a job from this field : " + player.getCareer());
+        System.out.println("\nYou chose a " + player.getCareer() + " job");
 
     }
 
@@ -192,7 +194,16 @@ public class Game {
         System.out.println(printBackstoryArt);
         System.out.println("Enter your Name: ");
         String playerName = getInput();
-
+        if (playerName.equalsIgnoreCase("DEV")) {
+            player.setName("DEV");
+            player.setPrivilege(true);
+            player.setEducation(true);
+            player.addStrength(5);
+            player.addIntellect(5);
+            player.addCreativity(5);
+            System.out.println("Playing the game in DEV mode");
+            return;
+        }
         System.out.println("Select your privilege status (Working Class)/(Middle Class): ");
         String getChoice = getInput("working class", "middle class");
 
@@ -203,11 +214,11 @@ public class Game {
         }
         System.out.println("" +
                 "You chose: " + getChoice + "\n" +
-                "Your Net Worth is: " + player.getNetWorth() + "\n\n");
+                "Your Net Worth is: " + player.getPrettyNetWorth() + "\n\n");
 
         clearScreen();
 
-        System.out.println(printBackstoryArt);
+//        System.out.println(printBackstoryArt);
         List<Backstory> backstories = getBackStoryScenes();
         processBackstories(backstories);
         System.out.println();
@@ -224,6 +235,7 @@ public class Game {
 
     private void processBackstories(List<Backstory> backstories) {
         for (Backstory backstory : backstories) {
+            System.out.println(Art.getArt("backstory"));
             System.out.println(backstory.getPrompt());
             System.out.println();
 
@@ -289,7 +301,10 @@ public class Game {
                 "                                                                                                                                                     |  $$$$$$/              |  $$$$$$/\n" +
                 "                                                                                                                                                      \\______/                \\______/ \n";
         System.out.println(art);
-        System.out.println("Welcome to Get Rich Or Die Trying.\n At a young age you realize that you want to be a millionaire by 40 years old.\n Your mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
+        System.out.println("Welcome to Get Rich Or Die Trying.\nAt a young age you realize that you want to be a millionaire.\nYour mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
+        System.out.println("\nPress any key to continue.");
+        getInput();
+        clearScreen();
         return "";
     }
 
