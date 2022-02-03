@@ -54,7 +54,7 @@ public class Game {
 
     private void playAgainOrExit() {
     }
-
+    //doesn't clear the scroll bar
     public void clearScreen() {
         try {
             if (isWindows) {
