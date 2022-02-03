@@ -55,7 +55,7 @@ public class Game {
 
     private void playAgainOrExit() {
     }
-
+    //doesn't clear the scroll bar
     public void clearScreen() {
         ProcessBuilder var0 = os.contains("windows") ? new ProcessBuilder(new String[]{"cmd", "/c", "cls"}) : new ProcessBuilder(new String[]{"clear"});
 
