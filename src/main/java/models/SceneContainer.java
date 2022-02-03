@@ -37,6 +37,7 @@ public class SceneContainer {
             for (Object sceneObject : fileData.getJSONArray(subcategory)) {
                 JSONObject definitelyJson = (JSONObject) sceneObject;
                 Scene newScene = Scene.fromJson(definitelyJson);
+                newScene.setCategory(category);
                 subCategoryScenes.add(newScene);
             }
             tempMap.put(subcategory, subCategoryScenes);
