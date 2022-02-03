@@ -29,8 +29,8 @@ public class Game {
             clearScreen();
             displayOutcome(input, currentScene);
             runEffect(input, currentScene);
-            player.addSalary();
-            displaySceneSummary();
+            String salaryReport = player.addSalary();
+            displaySceneSummary(salaryReport);
             nextTurnPrompt();
         }
         playAgainOrExit();
@@ -46,7 +46,7 @@ public class Game {
         }
 
         if (askToSave.equalsIgnoreCase("save")) {
-            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary());
+            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
             saveGame.save();
         }
     }
@@ -66,7 +66,7 @@ public class Game {
         }
     }
 
-    private String displaySceneSummary() {
+    private String displaySceneSummary(String salaryBreakdown) {
         String values = "";
         System.out.println("\n++++++ 5-Year Summary ++++++");
         System.out.println("Player: " + player.getName());
@@ -79,6 +79,8 @@ public class Game {
         } else {
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : "Sam"));
         }
+
+        System.out.println(salaryBreakdown);
 
         // This is currently being used to output the summary.
         // This can go away when serialization is implemented
@@ -189,6 +191,16 @@ public class Game {
     private void getPlayerBasicData() {
         System.out.println("Enter your Name: ");
         String playerName = getInput();
+        if(playerName.equalsIgnoreCase("DEV")){
+            player.setName("DEV");
+            player.setPrivilege(true);
+            player.setEducation(true);
+            player.addStrength(5);
+            player.addIntellect(5);
+            player.addCreativity(5);
+            System.out.println("Playing the game in DEV mode");
+            return;
+        }
 
         System.out.println("Select your privilege status (Working Class)/(Middle Class): ");
         String getChoice = getInput("working class", "middle class");
@@ -200,7 +212,7 @@ public class Game {
         }
         System.out.println("" +
                 "You chose: " + getChoice + "\n" +
-                "Your Net Worth is: " + player.getNetWorth() + "\n\n");
+                "Your Net Worth is: " + player.getPrettyNetWorth() + "\n\n");
 
         clearScreen();
         List<Backstory> backstories = getBackStoryScenes();
