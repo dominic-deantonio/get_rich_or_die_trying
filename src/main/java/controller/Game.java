@@ -5,12 +5,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Game {
     SceneContainer scenes;
     Person player = new Person();
-    boolean isWindows = System.getProperty("os.name").contains("Windows");
+    private static final String os = System.getProperty("os.name").toLowerCase();
+
 
     public void execute() {
 
@@ -30,8 +32,8 @@ public class Game {
             clearScreen();
             displayOutcome(input, currentScene);
             runEffect(input, currentScene);
-            player.addSalary();
-            displaySceneSummary();
+            String salaryReport = player.addSalary();
+            displaySceneSummary(salaryReport);
             nextTurnPrompt();
         }
         playAgainOrExit();
@@ -47,7 +49,7 @@ public class Game {
         }
 
         if (askToSave.equalsIgnoreCase("save")) {
-            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary());
+            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
             saveGame.save();
         }
     }
@@ -56,18 +58,17 @@ public class Game {
     }
 
     public void clearScreen() {
+        ProcessBuilder var0 = os.contains("windows") ? new ProcessBuilder(new String[]{"cmd", "/c", "cls"}) : new ProcessBuilder(new String[]{"clear"});
+
         try {
-            if (isWindows) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (Exception ignored) {
-            // Failed to clear the screen. Not much we can do about that.
+            var0.inheritIO().start().waitFor();
+        } catch (InterruptedException var2) {
+        } catch (IOException var3) {
+            var3.printStackTrace();
         }
     }
 
-    private String displaySceneSummary() {
+    private String displaySceneSummary(String salaryBreakdown) {
         String values = "";
         System.out.println("\n++++++ 5-Year Summary ++++++");
         System.out.println("Player: " + player.getName());
@@ -80,6 +81,8 @@ public class Game {
         } else {
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : "Sam"));
         }
+
+        System.out.println(salaryBreakdown);
 
         // This is currently being used to output the summary.
         // This can go away when serialization is implemented
@@ -192,6 +195,16 @@ public class Game {
         System.out.println(printBackstoryArt);
         System.out.println("Enter your Name: ");
         String playerName = getInput();
+        if(playerName.equalsIgnoreCase("DEV")){
+            player.setName("DEV");
+            player.setPrivilege(true);
+            player.setEducation(true);
+            player.addStrength(5);
+            player.addIntellect(5);
+            player.addCreativity(5);
+            System.out.println("Playing the game in DEV mode");
+            return;
+        }
 
         System.out.println("Select your privilege status (Working Class)/(Middle Class): ");
         String getChoice = getInput("working class", "middle class");
@@ -203,7 +216,7 @@ public class Game {
         }
         System.out.println("" +
                 "You chose: " + getChoice + "\n" +
-                "Your Net Worth is: " + player.getNetWorth() + "\n\n");
+                "Your Net Worth is: " + player.getPrettyNetWorth() + "\n\n");
 
         clearScreen();
 
