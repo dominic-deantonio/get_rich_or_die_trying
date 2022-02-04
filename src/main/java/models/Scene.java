@@ -10,6 +10,7 @@ public class Scene {
     private final String prompt;
     private final List<String> options, outcomes;
     private final List<Map<String, Object>> effects;
+    private boolean hasBeenUsed = false;
 
     private String category;
 
@@ -62,5 +63,13 @@ public class Scene {
 
     public String getArt() {
         return Art.getArt(category);
+    }
+
+    public void setHasBeenUsed(boolean b){
+        this.hasBeenUsed = b;
+    }
+
+    public boolean hasBeenUsed() {
+        return this.hasBeenUsed;
     }
 }
