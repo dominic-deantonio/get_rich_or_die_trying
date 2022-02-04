@@ -20,6 +20,27 @@
           "health": -30
         }
       ]
+    },
+    {
+      "prompt": "You are making your way downtown, walking fast, the faces pass as you're home bound. Your boss calls you and asks you to take  a higher position with the company. The pay is a lot more, but it is extremely risky. What do you do? ",
+      "options": [
+        "Take the job for the money",
+        "Keep the same position, you don't desire to put yourself at that much risk"
+      ],
+      "outcomes": [
+        "Three days into the new job, a tragedy occurs. You lose some limbs and are on life support. It doesn't look good for you.",
+        "Your boss fires you the next day. The company needs to go with someone who is willing to take risks."
+      ],
+      "effects": [
+        {
+          "money": 300000,
+          "health": -65
+        },
+        {
+          "money": -150000,
+          "health": -10
+        }
+      ]
     }
   ],
   "passion": [
@@ -48,6 +69,30 @@
           "money": -10000
         }
       ]
+    },
+    {
+      "prompt": "You are teaching students your craft. They love it, you love it, but the money is not enough to pay your bills. A student asks why wont you quit. Pick your response",
+      "options": [
+        "passion is more important than money",
+        "quit your job and get more money"
+      ],
+      "outcomes": [
+        "You get more students, but the money is still terrible. You start selling drugs on the side to supplement income",
+        "You are making more money, but the stress has caused you ulcers."
+      ],
+      "effects": [
+        {
+          "money": 10000,
+          "health": 5
+        },
+        {
+          "health": -15,
+          "career": 0
+
+
+        }
+
+      ]
     }
   ],
   "knowledge": [
@@ -67,6 +112,28 @@
         },
         {
           "money": 90000
+        }
+      ]
+    },
+    {
+      "prompt": "Its time to clock in ! You make amazing money, but you are miserable at your job. You work from home and as you sit in front of your desk, you contemplate leaving. You sign in to your zoom meeting.",
+      "options": [
+        "scream 'I QUIT' on the meeting",
+        "smile and tell your boss you are happy to be at the company"
+      ],
+      "outcomes": [
+        "You have gone viral. Your video has garnered national attention. You now have endorsements and are working for yourself",
+        "Your boss gives you a shout out. They are so happy to have you. You smile on the outside, but on the inside, its the opposite effect "
+      ],
+      "effects": [
+        {
+          "career": 0,
+          "money": 70000,
+          "health": 15
+        },
+        {
+          "money": 90000,
+          "health": -25
         }
       ]
     }
