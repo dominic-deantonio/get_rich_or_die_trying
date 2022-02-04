@@ -5,19 +5,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class Game {
     SceneContainer scenes;
     Person player = new Person();
-    private static final String os = System.getProperty("os.name").toLowerCase();
-
+    boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     public void execute() {
 
         scenes = new SceneContainer();
         welcome();
+        checkSaveFile();
         getPlayerBasicData();
         clearScreen();
         runSceneOneCareer(player);
@@ -25,6 +24,7 @@ public class Game {
         while (shouldPlay()) {
             clearScreen();
             Scene currentScene = scenes.getRandomScene(player);
+            System.out.println(currentScene.getArt());
             System.out.println("\n+++++++ 5 years later +++++++");
             player.addAge(5);
             int input = prompt(currentScene);
@@ -32,6 +32,8 @@ public class Game {
             displayOutcome(input, currentScene);
             runEffect(input, currentScene);
             String salaryReport = player.addSalary();
+            System.out.println("\nEnter any key to see your 5-year summary");
+            getInput();
             displaySceneSummary(salaryReport);
             nextTurnPrompt();
         }
@@ -55,15 +57,17 @@ public class Game {
 
     private void playAgainOrExit() {
     }
+
     //doesn't clear the scroll bar
     public void clearScreen() {
-        ProcessBuilder var0 = os.contains("windows") ? new ProcessBuilder(new String[]{"cmd", "/c", "cls"}) : new ProcessBuilder(new String[]{"clear"});
-
         try {
-            var0.inheritIO().start().waitFor();
-        } catch (InterruptedException var2) {
-        } catch (IOException var3) {
-            var3.printStackTrace();
+            if (isWindows) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (Exception ignored) {
+            // Failed to clear the screen. Not much we can do about that.
         }
     }
 
@@ -80,9 +84,7 @@ public class Game {
         } else {
             System.out.println("Partner: " + (player.getPartner() == null ? "none" : "Sam"));
         }
-
         System.out.println(salaryBreakdown);
-
         // This is currently being used to output the summary.
         // This can go away when serialization is implemented
         values += ("++++++ 5-Year Summary ++++++");
@@ -92,7 +94,7 @@ public class Game {
         if (player.isMarried()) {
             values += ("\nSpouse: " + player.getPartner());
         } else {
-            values += ("\nPartner: " + (player.getPartner() == null ? "none" : player.getPartner()));
+            values += ("\nPartner: " + (player.getPartner() == null ? "none" : player.getPartner().getName()));
         }
         return values;
     }
@@ -144,8 +146,7 @@ public class Game {
             }
         }
 
-        System.out.println("\n" +
-                "You chose a job from this field : " + player.getCareer());
+        System.out.println("\nYou chose a " + player.getCareer() + " job");
 
     }
 
@@ -189,10 +190,60 @@ public class Game {
         }
     }
 
+    public void checkSaveFile()
+    {
+        File checkFile = new File("saveFile.txt");
+        try
+        {
+            if(checkFile.exists() == true)
+            {
+                System.out.println("Enter name of player...");
+                String playerSavedName = getInput();
+                System.out.println(playerSavedName);
+                ReadFile read = new ReadFile("saveFile.txt");
+                String info = "";
+                for(String str: read.getStringArray())
+                {
+                    int i = 0;
+                    if(str.toUpperCase().contains(playerSavedName.toUpperCase()))
+                    {
+                        System.out.println("Found name");
+                        for(String str1: read.getStringArray())
+                        {
+                            info+=str1;
+                            info+="\n";
+                            if(str.contains("+") && i >0)
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+                }
+                String[] infoArray = info.split("\n");
+                for(int i = 0; i < infoArray.length; i++)
+                {
+                    System.out.println(infoArray[i]);
+                }
+                //System.out.println(read.toString());
+            }
+            else if(checkFile.exists() == false)
+            {
+                System.out.println("File does not exist");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private void getPlayerBasicData() {
+        String printBackstoryArt = Art.getArt("backstory");
+        System.out.println(printBackstoryArt);
         System.out.println("Enter your Name: ");
         String playerName = getInput();
-        if(playerName.equalsIgnoreCase("DEV")){
+        if (playerName.equalsIgnoreCase("DEV")) {
             player.setName("DEV");
             player.setPrivilege(true);
             player.setEducation(true);
@@ -202,7 +253,6 @@ public class Game {
             System.out.println("Playing the game in DEV mode");
             return;
         }
-
         System.out.println("Select your privilege status (Working Class)/(Middle Class): ");
         String getChoice = getInput("working class", "middle class");
 
@@ -216,6 +266,8 @@ public class Game {
                 "Your Net Worth is: " + player.getPrettyNetWorth() + "\n\n");
 
         clearScreen();
+
+//        System.out.println(printBackstoryArt);
         List<Backstory> backstories = getBackStoryScenes();
         processBackstories(backstories);
         System.out.println();
@@ -232,6 +284,7 @@ public class Game {
 
     private void processBackstories(List<Backstory> backstories) {
         for (Backstory backstory : backstories) {
+            System.out.println(Art.getArt("backstory"));
             System.out.println(backstory.getPrompt());
             System.out.println();
 
@@ -297,7 +350,10 @@ public class Game {
                 "                                                                                                                                                     |  $$$$$$/              |  $$$$$$/\n" +
                 "                                                                                                                                                      \\______/                \\______/ \n";
         System.out.println(art);
-        System.out.println("Welcome to Get Rich Or Die Trying.\n At a young age you realize that you want to be a millionaire by 40 years old.\n Your mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
+        System.out.println("Welcome to Get Rich Or Die Trying.\nAt a young age you realize that you want to be a millionaire.\nYour mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
+        System.out.println("\nPress any key to continue.");
+        getInput();
+        clearScreen();
         return "";
     }
 

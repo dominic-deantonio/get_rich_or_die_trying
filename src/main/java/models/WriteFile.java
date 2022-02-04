@@ -15,12 +15,28 @@ public class WriteFile {
         this.fileName = fileName;
         this.content = content;
     }
+
+    public void saveFile(boolean appendFile)//Will be called when more than one player is added
+    {//Should be a method that calls this method for adding more than one player
+        try
+        {
+            BufferedWriter write = new BufferedWriter(new FileWriter(fileName, appendFile));
+            write.write(content);
+            write.close();
+            System.out.println("Your saved game has been updated.");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void saveFile()
     {
         try
         {
-            BufferedWriter write = new BufferedWriter(new FileWriter(fileName, true));
-            write.write("\n"+content);
+            BufferedWriter write = new BufferedWriter(new FileWriter(fileName, false));
+            write.write(content);
             write.close();
             System.out.println("Your saved game has been updated.");
         }

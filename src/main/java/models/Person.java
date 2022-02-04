@@ -31,7 +31,9 @@ public class Person {
         return netWorth;
     }
 
-    public void setNetWorth(int netWorth) {this.netWorth = netWorth;}
+    public void setNetWorth(int netWorth) {
+        this.netWorth = netWorth;
+    }
 
     public String getPrettyNetWorth() {
         return money.format(netWorth);
@@ -57,7 +59,7 @@ public class Person {
         double randModifier = new Random().nextDouble() * (1.25d - .75d) + .75d;
         int modifiedAmountToAdd = (int) (amountToAdd * randModifier);
         netWorth += modifiedAmountToAdd;
-        final String msg = String.format("You have %s %s from your choice", (amountToAdd < 0 ? "lost" : "gained"),   money.format(modifiedAmountToAdd));
+        final String msg = String.format("You have %s %s from your choice", (amountToAdd < 0 ? "lost" : "gained"), money.format(modifiedAmountToAdd));
         System.out.println(msg);
     }
 
@@ -131,7 +133,7 @@ public class Person {
     public void addAge(int i) {
         age += i;
 
-        if(age > 50){
+        if (age > 50) {
             Random rand = new Random();
             int amountHealthToDecrease = -(rand.nextInt(15) + 1);
             System.out.println("You are getting older and losing health.");
@@ -165,18 +167,17 @@ public class Person {
         int sum = (int) (amountToAdd * educationMultiplier * incomeMultiplier);
         int oldNetWorth = netWorth;
         netWorth = sum + netWorth;
+
         String netWorthSummary = "Your current net worth: " + money.format(netWorth);
         System.out.println(netWorthSummary);
+
         return "\nYou have earned " + money.format(sum) + " in the last 5 years from your job.\n" +
                 "\nNet worth breakdown: " +
-                "\nBase yearly salary: " + career.getSalaryAmount() +
-                "\nYearly salary * 5 years: " + amountToAdd +
+                "\nBase yearly salary: " + money.format(career.getSalaryAmount()) +
+                "\nYearly salary * 5 years: " + money.format(amountToAdd) +
                 "\nEducation Multiplier: " + educationMultiplier +
                 "\nIncome Multiplier from " + getAttributeFromCareer() + ": " + incomeMultiplier +
                 "\nTotal: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(oldNetWorth) + "=" + money.format(netWorth);
-
-
-
     }
 
     private String getAttributeFromCareer() {
@@ -197,11 +198,11 @@ public class Person {
 
         switch (career) {
             case DANGER:
-                return (10.0 + strength)/10;
+                return (10.0 + strength) / 10;
             case KNOWLEDGE:
-                return (10.0 + intellect)/10;
+                return (10.0 + intellect) / 10;
             case PASSION:
-                return (10.0 + creativity)/10;
+                return (10.0 + creativity) / 10;
             default:
                 return 1;
         }
