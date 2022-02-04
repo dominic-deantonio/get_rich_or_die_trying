@@ -16,6 +16,7 @@ public class Game {
 
         scenes = new SceneContainer();
         welcome();
+        checkSaveFile();
         getPlayerBasicData();
         clearScreen();
         runSceneOneCareer(player);
@@ -93,7 +94,7 @@ public class Game {
         if (player.isMarried()) {
             values += ("\nSpouse: " + player.getPartner());
         } else {
-            values += ("\nPartner: " + (player.getPartner() == null ? "none" : player.getPartner()));
+            values += ("\nPartner: " + (player.getPartner() == null ? "none" : player.getPartner().getName()));
         }
         return values;
     }
@@ -186,6 +187,54 @@ public class Game {
 
             for (String selection : selections)
                 System.out.println(selection);
+        }
+    }
+
+    public void checkSaveFile()
+    {
+        File checkFile = new File("saveFile.txt");
+        try
+        {
+            if(checkFile.exists() == true)
+            {
+                System.out.println("Enter name of player...");
+                String playerSavedName = getInput();
+                System.out.println(playerSavedName);
+                ReadFile read = new ReadFile("saveFile.txt");
+                String info = "";
+                for(String str: read.getStringArray())
+                {
+                    int i = 0;
+                    if(str.toUpperCase().contains(playerSavedName.toUpperCase()))
+                    {
+                        System.out.println("Found name");
+                        for(String str1: read.getStringArray())
+                        {
+                            info+=str1;
+                            info+="\n";
+                            if(str.contains("+") && i >0)
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+                }
+                String[] infoArray = info.split("\n");
+                for(int i = 0; i < infoArray.length; i++)
+                {
+                    System.out.println(infoArray[i]);
+                }
+                //System.out.println(read.toString());
+            }
+            else if(checkFile.exists() == false)
+            {
+                System.out.println("File does not exist");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 
