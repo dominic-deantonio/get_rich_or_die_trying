@@ -39,7 +39,8 @@
         },
         {
           "money" : -10000,
-          "health" : -10
+          "health" : -10,
+          "divorce": 1
         }
       ]
     }
