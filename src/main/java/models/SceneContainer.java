@@ -74,13 +74,13 @@ public class SceneContainer {
             attemptsToRandomize++;
 
             if (attemptsToRandomize > MAX_ATTEMPTS) {
-                System.out.println("Exceeded max attempts; Unlocking all scenes");
+                //System.out.println("Exceeded max attempts; Unlocking all scenes");
                 setAllScenesToUnused(); // We have tried to get an unused scene too many times. Unlock them all
             }
 
         } while (sceneToUse.hasBeenUsed());
 
-        System.out.println("Picked random scene after " + attemptsToRandomize + " attempts");
+        //System.out.println("Picked random scene after " + attemptsToRandomize + " attempts");
 
         sceneToUse.setHasBeenUsed(true); // Need to set this to true to make sure it is not used
         return sceneToUse;

@@ -5,11 +5,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Game {
     SceneContainer scenes;
     Person player = new Person();
+    private static final String os = System.getProperty("os.name").toLowerCase();
     boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     public void execute() {
@@ -60,14 +62,13 @@ public class Game {
 
     //doesn't clear the scroll bar
     public void clearScreen() {
+        ProcessBuilder var0 = os.contains("windows") ? new ProcessBuilder(new String[]{"cmd", "/c", "cls"}) : new ProcessBuilder(new String[]{"clear"});
+
         try {
-            if (isWindows) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (Exception ignored) {
-            // Failed to clear the screen. Not much we can do about that.
+            var0.inheritIO().start().waitFor();
+        } catch (InterruptedException var2) {
+        } catch (IOException var3) {
+            var3.printStackTrace();
         }
     }
 
@@ -229,7 +230,7 @@ public class Game {
             }
             else if(checkFile.exists() == false)
             {
-                System.out.println("File does not exist");
+                //System.out.println("File does not exist");
             }
         }
         catch(Exception e)
