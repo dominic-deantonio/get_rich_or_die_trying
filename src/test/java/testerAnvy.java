@@ -34,4 +34,18 @@ public class testerAnvy {
         //System.out.println(player.getIncomeMultiplier());
     }
 
+    @Test
+    public void divorce() {
+        System.out.println(player.getPartner());
+        player.addPartner(1);
+        System.out.println(player.getPartner());
+        player.marryPartner(1);
+        player.isMarried();
+        player.addDivorce();
+        System.out.println(player.isMarried());
+
+    }
+
+
+
 }

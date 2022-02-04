@@ -74,11 +74,12 @@ public class Person {
     }
 
     public void addPartner(int value) {
-        if (partner == null)
+        if (partner == null) {
             partner = new Person("Sam", value);
 
-        final String msg = String.format("You have a new partner named %s", partner.name);
-        System.out.println(msg);
+            final String msg = String.format("You have a new partner named %s", partner.name);
+            System.out.println(msg);
+        }
 
     }
 
@@ -88,12 +89,19 @@ public class Person {
     }
 
     public void marryPartner(int value) {
-        if (partner != null)
+
+        System.out.println(partner!=null);
+        if (partner !=null) {
+            this.setMarried(true);
             partner.setMarried(true);
+        }
     }
 
     private void setMarried(boolean b) {
-        this.isMarried = true;
+
+        this.isMarried = b;
+
+
     }
 
     public void addChild(int value) {
@@ -234,5 +242,18 @@ public class Person {
 
     public void setPrivilege(boolean b) {
         this.hasPrivilege = b;
+    }
+
+    public void removePartner() {
+
+            partner = null;
+
+    }
+
+    public void addDivorce() {
+
+            removePartner();
+            setMarried(false);
+
     }
 }
