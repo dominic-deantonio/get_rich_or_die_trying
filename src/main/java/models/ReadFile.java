@@ -62,7 +62,11 @@ public class ReadFile {
 
     public static void main(String[] args)
     {
-        ReadFile read = new ReadFile("data.txt");
-        System.out.println(read.toString());
+        /*ReadFile read = new ReadFile("test.txt");
+        for(String str: read.getStringArray())
+        {
+            System.out.println(str);
+        }
+        System.out.println(read.toString());*/
     }
 }

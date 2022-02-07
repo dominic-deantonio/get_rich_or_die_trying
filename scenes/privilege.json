@@ -12,11 +12,32 @@
       ],
       "effects": [
         {
-          "money" : -10000,
+          "money" : -100000,
           "health" : -10
         },
         {
-          "money" : -20000,
+          "money" : -200000,
+          "health" : -10
+        }
+      ]
+    },
+    {
+      "prompt": "You have found yourself in some trouble. Your family doesn't want you to ruin their family's name. They offer to send you to a 'camp' to keep you out of trouble for a little.",
+      "options": [
+        "take help",
+        "decline help"
+      ],
+      "outcomes": [
+        "You find yourself in more trouble at the camp. You family has been getting you out of trouble all of your life, but they cant help with this one. " ,
+        "Your family decides to take away some of your trust fund since you dont want their help."
+      ],
+      "effects": [
+        {
+          "money" : -100000,
+          "health" : -20
+        },
+        {
+          "money" : -400000,
           "health" : -10
         }
       ]
@@ -24,23 +45,22 @@
   ],
   "false": [
     {
-      "prompt": "You are standing in the check-out line at the grocery store. You are nervous because you are low on funds but need to buy food cause you're hungry. You hand the clerk your debit card. The clerks scans and says'I'm sorry, it's not going through...what do you want me to do?'",
+      "prompt": "As you are walking, you see a lottery ticket with a note attached, it reads 'It's your lucky day. You have until 5 pm to cash this ticket.' It is 4:58 pm.",
       "options": [
-        "put food back",
-        "shoplift"
+        "cash ticket",
+        "ignore it"
       ],
       "outcomes": [
-        "You return the food back as your eyes swell with hunger. Hopefully you can pick up an odd job tomorrow and have a meal. At least you did the right thing.",
-        "You tell the clerk that you will return the food back to the shelves. As you walk toward the aisle, you pocket some cans of tunas in your puffy winter jacket. "
+        "Life has been beating you up since birth. Any good thing that has happened to you has been because of your strength and will. That changed today. You won a lot of money, although you now have a sprained ankle from running",
+        "Played it safe and took a small raise. You should have cashed that ticket "
       ],
       "effects": [
         {
-          "money" : 0,
-          "health" : -5
+          "money" : 55000,
+          "health" : -15
         },
         {
-          "money" : 0,
-          "health" : 5
+          "money" :725
         }
       ]
     }

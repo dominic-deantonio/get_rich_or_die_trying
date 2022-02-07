@@ -1,23 +1,44 @@
 {
   "true": [
     {
-      "prompt": "Your baby is having night terrors and keeps crying throughout the night. You are exhausted and have a big meeting tomorrow. What do you do?",
+      "prompt": "Your child is having night terrors and keeps crying throughout the night. You are exhausted and have a big meeting tomorrow. What do you do?",
       "options": [
         "let her cry",
         "soothe her"
       ],
       "outcomes": [
-        "'She has to learn to self-regulate', you think. You decide to let her cry and as a result, you are able to get a better sleep.  " ,
+        "'She has to learn to self-regulate', you think. You decide to let her cry and as a result, you are able to get a better sleep.  ",
         "You go to your baby and pick her up from the crib. You sigh knowing you will do terribly in your meeting tomorrow and it will affect your job performance."
       ],
       "effects": [
         {
-          "money" : 5000,
-          "health" : 5
+          "money": 5000,
+          "health": 5
         },
         {
-          "money" : -5000,
-          "health" : -5
+          "money": -100000,
+          "health": -5
+        }
+      ]
+    },
+    {
+      "prompt": "Your child is struggling in math class and you want to help, but you are not very good at math. You need to decide whether to spend the money on a tutor or get better at math yourself to better help your child.",
+      "options": [
+        "hire tutor",
+        "learn math"
+      ],
+      "outcomes": [
+        "The tutor you hired turned out to be a fraud. Great. Now you wasted money AND your child is still not good at math.",
+        "When did children start learning advanced calculus in junior high school?? You spend weeks studying to save a bit of money. Your child scores a B+ on her next exam. 'Not bad', you think to yourself."
+      ],
+      "effects": [
+        {
+          "money": -100000,
+          "health": 5
+        },
+        {
+          "money": 40000,
+          "health": -30
         }
       ]
     }
@@ -35,13 +56,35 @@
       ],
       "effects": [
         {
-          "money" : -100000,
-          "health" : -5,
+          "money": -100000,
+          "health": -5,
           "addchild": 1
         },
         {
-          "money" : 100000,
-          "health" : 5
+          "money": 50000,
+          "health": 5
+        }
+      ]
+    },
+    {
+      "prompt": "Your sister has died. In her will, your sister requested that her young daughter live with you because your sister thinks you would make a good role model. The lawyer hands you the legal forms to sign.",
+      "options": [
+        "sign forms",
+        "shred forms"
+      ],
+      "outcomes": [
+        "You will raise the child as your own in honor of your sister. You return the signed forms to the lawyer and he says, 'Your sister also wanted to pass along a substantial sum of money to ensure the welfare of her daughter'",
+        "You already have too many commitments and your sister never asked if this was okay with you. 'I'm sorry', you say. 'I am just not in the right place for this now...'"
+      ],
+      "effects": [
+        {
+          "money": 80000,
+          "health": -5,
+          "addchild": 1
+        },
+        {
+          "money": 10000,
+          "health": 5
         }
       ]
     }

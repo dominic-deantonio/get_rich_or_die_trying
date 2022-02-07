@@ -29,6 +29,9 @@ public class EffectsTranslator {
                 case "marry":
                     player.marryPartner(value);
                     break;
+                case "divorce":
+                    player.addDivorce();
+                    break;
                 case "addchild":
                     player.addChild(value);
                     break;
