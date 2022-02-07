@@ -257,6 +257,12 @@ public class Game {
         System.out.println(printBackstoryArt);
         System.out.println("Enter your Name: ");
         String playerName = getInput();
+
+        while(playerName.isEmpty()){
+            System.out.println("Name is required. Please enter your name.");
+            playerName = getInput();
+        }
+
         if (playerName.equalsIgnoreCase("DEV")) {
             player.setName("DEV");
             player.setPrivilege(true);
@@ -291,6 +297,9 @@ public class Game {
 
         boolean userWantsCollege = educationChoice.equalsIgnoreCase("y");
         System.out.printf("Your name is %s. You chose to %s college.", playerName, userWantsCollege ? "go to" : "skip");
+
+        if(userWantsCollege)
+            player.addMoney(-100000);
 
         player.setName(playerName);
         player.setEducation(userWantsCollege);
