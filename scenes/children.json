@@ -16,7 +16,7 @@
           "health": 5
         },
         {
-          "money": -5000,
+          "money": -100000,
           "health": -5
         }
       ]
@@ -61,7 +61,7 @@
           "addchild": 1
         },
         {
-          "money": 100000,
+          "money": 50000,
           "health": 5
         }
       ]
@@ -78,7 +78,7 @@
       ],
       "effects": [
         {
-          "money": 150000,
+          "money": 80000,
           "health": -5,
           "addchild": 1
         },
