@@ -24,8 +24,8 @@
     {
       "prompt": "You have found yourself in some trouble. Your family doesn't want you to ruin their family's name. They offer to send you to a 'camp' to keep you out of trouble for a little.",
       "options": [
-        "take the help",
-        "decline the help"
+        "take help",
+        "decline help"
       ],
       "outcomes": [
         "You find yourself in more trouble at the camp. You family has been getting you out of trouble all of your life, but they cant help with this one. " ,
@@ -45,10 +45,10 @@
   ],
   "false": [
     {
-      "prompt": "As you are walking, you see a lottery ticket with a note attached, it reads 'its your lucky day.you have until 5pm to cash this ticket.' It is 4:58",
+      "prompt": "As you are walking, you see a lottery ticket with a note attached, it reads 'It's your lucky day. You have until 5 pm to cash this ticket.' It is 4:58 pm.",
       "options": [
-        "run to the store in your busted shoes and try to cash the ticket in time",
-        "don't bother, you have to make it home in time for a very important meeting about a raise. "
+        "cash ticket",
+        "ignore it"
       ],
       "outcomes": [
         "Life has been beating you up since birth. Any good thing that has happened to you has been because of your strength and will. That changed today. You won a lot of money, although you now have a sprained ankle from running",

@@ -44,15 +44,28 @@ public class Person {
     }
 
     public String getCategoryValue(int index) {
+
+        if (index < 0)
+            index = 0;
+
         List<String> fieldValues = List.of(
                 career.toString().toLowerCase(),
                 education.toString(),
-                Boolean.toString(partner != null),
+                getPartnerStatus(),
                 hasPrivilege.toString(),
                 Boolean.toString(health > 50),
                 Boolean.toString(children > 0)
         );
         return fieldValues.get(index);
+    }
+
+    private String getPartnerStatus() {
+        String partnerStatus = "single";
+
+        if (this.partner != null)
+            partnerStatus = isMarried ? "married" : "partner";
+
+        return partnerStatus;
     }
 
     public void addMoney(int amountToAdd) {
@@ -84,24 +97,21 @@ public class Person {
     }
 
     public void breakUp(int value) {
-        System.out.println("Should break up with partner");
-
+        this.partner = null;
+        this.isMarried = false;
+        System.out.println("You and Sam have broken up.");
     }
 
     public void marryPartner(int value) {
-
-        System.out.println(partner!=null);
-        if (partner !=null) {
+        if (partner != null) {
             this.setMarried(true);
             partner.setMarried(true);
+            System.out.println("You have married your partner, Sam");
         }
     }
 
     private void setMarried(boolean b) {
-
         this.isMarried = b;
-
-
     }
 
     public void addChild(int value) {
@@ -246,14 +256,14 @@ public class Person {
 
     public void removePartner() {
 
-            partner = null;
+        partner = null;
 
     }
 
     public void addDivorce() {
 
-            removePartner();
-            setMarried(false);
+        removePartner();
+        setMarried(false);
 
     }
 }
