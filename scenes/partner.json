@@ -13,13 +13,34 @@
       "effects": [
         {
           "money": -50000,
-          "health": 10,
+          "health": 5,
           "marry": 1
         },
         {
           "money": -3000,
           "health": -15,
           "breakup": 1
+        }
+      ]
+    },
+    {
+      "prompt": "You are ready to take a mature step in your relationship. You know that you can spend the rest of your life with Sam and you are extremely in love. There's one thing that bothers you. Sam doesn't like cilantro and forbids it from being in the house.",
+      "options": [
+        "propose",
+        "simmer on it"
+      ],
+      "outcomes": [
+        "'YESS, I accept!' Sam accepts and you both beam with joy. You are getting married and it's now time to prepare a big celebration.",
+        "The non-cilantro rule bothers you. You become distant. Sam notices your coldness. Your relationship is affected."
+      ],
+      "effects": [
+        {
+          "money": -500000,
+          "marry": 1
+        },
+        {
+          "money": -200000,
+          "health": -10
         }
       ]
     }
@@ -45,6 +66,26 @@
           "health": -10
         }
       ]
+    },
+    {
+      "prompt": "It's an icy winter day and you are carefully walking so you don't slip. 'WABAMM!!' You are clumsy and fall anyways. As you struggle to pick yourself up from the floor, a pair of strong arms pulls you. 'Are you okay?' a beautiful stranger asks.",
+      "options": [
+        "ask them for coffee",
+        "blush and walk away"
+      ],
+      "outcomes": [
+        "You enjoy a magical date and find out that you both love tapas and scary movies. Wow, this could really be something, you think. You are hopeful and decide to explore the relationship further.",
+        "You are not in a good place in your life to date. You need to work on yourself before you share your life with someone. You nod, 'Yes, I need to put myself first.'"
+      ],
+      "effects": [
+        {
+          "money": -50000,
+          "dating": 1
+        },
+        {
+          "health": 5
+        }
+      ]
     }
   ],
   "married": [
@@ -67,6 +108,28 @@
         {
           "money": -50000,
           "health": -25
+        }
+      ]
+    },
+    {
+      "prompt": "One day Sam comes home covered in blood. You are shocked and asks her what happened. 'I can't tell you but I need your help,' Sam says. What do you do?",
+      "options": [
+        "you can't handle this. divorce.",
+        "agree to help"
+      ],
+      "outcomes": [
+        "As much as you love Sam, you are not willing to be a accomplice. You have your elderly parents to think about. Besides, you are too weak to dig any holes that may be required of you.",
+        "Sam tells you to dig a hole. Sam won't answer any of your questions. You sign and reluctantly grab the shovel as the rain pours down. You are now afraid of Sam."
+      ],
+      "effects": [
+        {
+          "money": -250000,
+          "health": -25,
+          "divorce": 1
+        },
+        {
+          "money": -150000,
+          "health": -50
         }
       ]
     }
