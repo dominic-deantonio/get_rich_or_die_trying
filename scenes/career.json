@@ -12,11 +12,11 @@
       ],
       "effects": [
         {
-          "money": 50000,
+          "money": 10000,
           "health": -15
         },
         {
-          "money": 200000,
+          "money": 50000,
           "health": -30
         }
       ]
@@ -33,11 +33,11 @@
       ],
       "effects": [
         {
-          "money": 300000,
+          "money": 100000,
           "health": -65
         },
         {
-          "money": -150000,
+          "money": -300000,
           "health": -10
         }
       ]
@@ -58,15 +58,15 @@
       ],
       "effects": [
         {
-          "money": 80000
+          "money": 10000
         },
         {
-          "money": 100000,
+          "money": 50000,
           "health": 5
         },
         {
           "health": -10,
-          "money": -10000
+          "money": -100000
         }
       ]
     },

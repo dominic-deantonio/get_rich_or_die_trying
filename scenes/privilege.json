@@ -12,11 +12,11 @@
       ],
       "effects": [
         {
-          "money" : -10000,
+          "money" : -100000,
           "health" : -10
         },
         {
-          "money" : -20000,
+          "money" : -200000,
           "health" : -10
         }
       ]
