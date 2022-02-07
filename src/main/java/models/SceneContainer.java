@@ -14,7 +14,7 @@ public class SceneContainer {
     public SceneContainer() {
         Map<String, List<Scene>> career = loadScenes("career", "danger", "knowledge", "passion");
         Map<String, List<Scene>> education = loadScenes("education", "true", "false");
-        Map<String, List<Scene>> partner = loadScenes("partner", "true", "false");
+        Map<String, List<Scene>> partner = loadScenes("partner", "married", "single", "partner");
         Map<String, List<Scene>> privilege = loadScenes("privilege", "true", "false");
         Map<String, List<Scene>> children = loadScenes("children", "true", "false");
         Map<String, List<Scene>> health = loadScenes("health", "true", "false");

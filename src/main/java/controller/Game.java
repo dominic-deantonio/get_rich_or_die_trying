@@ -117,7 +117,20 @@ public class Game {
             System.out.println(option);
 
         String input = getInput(currentScene.getOptions());
-        return currentScene.getOptions().indexOf(input.toLowerCase());
+
+        int selectedIndex = 0;
+
+        // currentScene.getOptions.indexOf(input) is case-sensitive and the user might not enter the correct case
+        // doing it this way ignores case and still gets the index
+        for(String option : currentScene.getOptions()) {
+            if (option.equalsIgnoreCase(input))
+                break;
+
+            selectedIndex++;
+        }
+
+
+        return selectedIndex;
     }
 
     private void runSceneOneCareer(Person player) {

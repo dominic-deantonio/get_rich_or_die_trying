@@ -22,10 +22,10 @@
       ]
     },
     {
-      "prompt": "You are making your way downtown, walking fast, the faces pass as you're home bound. Your boss calls you and asks you to take  a higher position with the company. The pay is a lot more, but it is extremely risky. What do you do? ",
+      "prompt": "You are making your way downtown, walking fast, the faces pass as you're home bound. Your boss calls you and asks you to take a higher position with the company. The pay is a lot more, but it is extremely risky. What do you do? ",
       "options": [
-        "Take the job for the money",
-        "Keep the same position, you don't desire to put yourself at that much risk"
+        "take job",
+        "no thanks"
       ],
       "outcomes": [
         "Three days into the new job, a tragedy occurs. You lose some limbs and are on life support. It doesn't look good for you.",
@@ -86,12 +86,8 @@
           "health": 5
         },
         {
-          "health": -15,
-          "career": 0
-
-
+          "health": -15
         }
-
       ]
     }
   ],
@@ -116,18 +112,17 @@
       ]
     },
     {
-      "prompt": "Its time to clock in ! You make amazing money, but you are miserable at your job. You work from home and as you sit in front of your desk, you contemplate leaving. You sign in to your zoom meeting.",
+      "prompt": "Its time to clock in! You make amazing money, but you are miserable at your job. You work from home and as you sit in front of your desk, you contemplate leaving. You sign in to your Zoom meeting.",
       "options": [
-        "scream 'I QUIT' on the meeting",
-        "smile and tell your boss you are happy to be at the company"
+        "scream I QUIT",
+        "start meeting"
       ],
       "outcomes": [
         "You have gone viral. Your video has garnered national attention. You now have endorsements and are working for yourself",
-        "Your boss gives you a shout out. They are so happy to have you. You smile on the outside, but on the inside, its the opposite effect "
+        "Your boss gives you a shout out. They are so happy to have you. You smile on the outside, but on the inside, its the opposite effect"
       ],
       "effects": [
         {
-          "career": 0,
           "money": 70000,
           "health": 15
         },
