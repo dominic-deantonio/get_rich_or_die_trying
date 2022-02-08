@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Person {
-
+    //Fields
     private int netWorth = 0, health = 100, age = 18, children = 0;
     private final NumberFormat money = NumberFormat.getCurrencyInstance();
     private int strength = 0, intellect = 0, creativity = 0;
@@ -14,6 +14,7 @@ public class Person {
     private Person partner = null;
     private String name;
 
+    //Constructors
     public Person() {
         money.setMaximumFractionDigits(0);
     }
@@ -23,26 +24,24 @@ public class Person {
         this.netWorth = initialWorth;
     }
 
-    public int getHealthPoints() {
-        return this.health;
-    }
+    //Business Methods
 
-    public int getNetWorth() {
-        return netWorth;
-    }
-
-    public void setNetWorth(int netWorth) {
-        this.netWorth = netWorth;
-    }
-
+    /**
+     * Returns a String value of the Persons netWorth variable in a format that include dollar sign ($)
+     * using .format().
+     * @return Formatted String
+     */
     public String getPrettyNetWorth() {
         return money.format(netWorth);
     }
 
-    public boolean hasEducation() {
-        return education;
-    }
-
+    /**
+     * Returns a String value of the field values based on index passed from List.
+     * created internally:
+     * [career(String), education (String), partner status(String), privilege (boolean), health > 50 (boolean-String), children > 0 (boolean-String)]
+     * @param index value of desired index.
+     * @return String value of one of above values in List.
+     */
     public String getCategoryValue(int index) {
 
         if (index < 0)
@@ -59,6 +58,11 @@ public class Person {
         return fieldValues.get(index);
     }
 
+    /**
+     * Returns String value of Partner Status.
+     * Options: 'single', 'married', 'partner'.
+     * @return One String value of above options.
+     */
     private String getPartnerStatus() {
         String partnerStatus = "single";
 
@@ -68,6 +72,11 @@ public class Person {
         return partnerStatus;
     }
 
+    /**
+     * Adds amountToAdd value into netWorth variable after being multiplied by a random modifier value.
+     * Prints a formatted String with modified value after applying modifier.
+     * @param amountToAdd Amount to be added to netWorth variable.
+     */
     public void addMoney(int amountToAdd) {
         double randModifier = new Random().nextDouble() * (1.25d - .75d) + .75d;
         int modifiedAmountToAdd = (int) (amountToAdd * randModifier);
@@ -76,6 +85,11 @@ public class Person {
         System.out.println(msg);
     }
 
+    /**
+     * Adds value to health variable, if new value make health value over 100 value is adjusted to equal 100.
+     * Print message if Player lost(negative value) or gained(positive value) and value passed in as parameter.
+     * @param value value being added to health variable.
+     */
     public void addHealth(int value) {
         health += value;
         if (health > 100)
@@ -86,6 +100,10 @@ public class Person {
 
     }
 
+    /**
+     * Creates a new Person object that will represent the Partner, He is automatically named 'Sam'.
+     * @param value int value that represents the Partners net worth.
+     */
     public void addPartner(int value) {
         if (partner == null) {
             partner = new Person("Sam", value);
@@ -96,12 +114,24 @@ public class Person {
 
     }
 
+    /**
+     * Setts Person object variable to specific values to indicate marriage is over.
+     * partner (Person object) variable to null.
+     * isMarried variable set to false.
+     * @param value N/A
+     */
     public void breakUp(int value) {
         this.partner = null;
         this.isMarried = false;
         System.out.println("You and Sam have broken up.");
     }
 
+    /**
+     * Sets Person object variables to specific value to indicate marriage.
+     * setMarried variable set to 'true'.
+     * partner (Person) object's isMarried variable set to 'true'.
+     * @param value N/A
+     */
     public void marryPartner(int value) {
         if (partner != null) {
             this.setMarried(true);
@@ -110,10 +140,10 @@ public class Person {
         }
     }
 
-    private void setMarried(boolean b) {
-        this.isMarried = b;
-    }
-
+    /**
+     * Increments children variable value by parameter value.
+     * @param value Number of children being incremented to current children variable value.
+     */
     public void addChild(int value) {
         children += value;
         String some = value > 1 ? "children" : "child";
@@ -121,6 +151,12 @@ public class Person {
         System.out.println(msg);
     }
 
+    /**
+     * Adjusts Person (Person Object) career variable to another value based on parameter value.
+     * Used Careers ENUM class.
+     * Prints message indicating old value and new value.
+     * @param value new career value
+     */
     public void changeCareer(int value) {
         String oldCareer = career.name();
         career = Careers.values()[value];
@@ -128,18 +164,11 @@ public class Person {
         System.out.println(msg);
     }
 
-    public void setEducation(boolean b) {
-        this.education = b;
-    }
-
-    public void setCareer(Careers career) {
-        this.career = career;
-    }
-
-    public Careers getCareer() {
-        return this.career;
-    }
-
+    /**
+     * Adds parameter(i) value to age variable
+     * If age value after addition is more than 50, then random amount is deducted from health variable.
+     * @param i value of age increase
+     */
     public void addAge(int i) {
         age += i;
 
@@ -154,22 +183,12 @@ public class Person {
         System.out.println(msg);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getChildren() {
-        return this.children;
-    }
-
-    public Person getPartner() {
-        return partner;
-    }
-
-    public boolean isMarried() {
-        return isMarried;
-    }
-
+    /**
+     *Adds to netWorth: Five times Person object salary
+     * times(*) education multiplier (1.5 or 1)
+     * times (*) income multiplier using incomeMultiplier() return value.
+     * @return Sting representation 5 year summary after adding a sum to total netWorth.
+     */
     public String addSalary() {
         int amountToAdd = career.getSalaryAmount() * 5;
         double educationMultiplier = hasEducation() ? 1.5 : 1;
@@ -190,6 +209,10 @@ public class Person {
                 "\nTotal: (Yearly Salary * 5 years * education multiplier * income multiplier): " + money.format(sum) + " + Previous net worth: " + money.format(oldNetWorth) + "=" + money.format(netWorth);
     }
 
+    /**
+     * Returns attribute value based on career (Career ENUM) variable value
+     * @return String attribute value.
+     */
     private String getAttributeFromCareer() {
         switch (career) {
             case DANGER:
@@ -203,6 +226,10 @@ public class Person {
         }
     }
 
+    /**
+     * Returns double value based on career(type: Career Enum) variable type and attribute value
+     * @return Value of income multiplier
+     */
     private double getIncomeMultiplier() {
         //1 - 1.5
 
@@ -218,20 +245,66 @@ public class Person {
         }
     }
 
-    public void setName(String playerName) {
-        this.name = playerName;
-    }
-
+    /**
+     * Increments creativity variable by parameter (i) passed in
+     * @param i value of increase to creativity variable
+     */
     public void addCreativity(int i) {
         this.creativity += i;
     }
 
+    /**
+     * Increments intellect variable by parameter (i) passed in
+     * @param i value of increase to intellect variable
+     */
     public void addIntellect(int i) {
         this.intellect += i;
     }
 
+    /**
+     * Increments strength variable by parameter (i) passed in
+     * @param i value of increase to strength variable
+     */
     public void addStrength(int i) {
         this.strength += i;
+    }
+
+    /**
+     * Sets partner field (Person object) to null.
+     */
+    public void removePartner() {
+        partner = null;
+    }
+
+    /**
+     * Calls on removePartner() and sets married field to 'false'.
+     */
+    public void addDivorce() {
+        removePartner();
+        setMarried(false);
+    }
+
+
+
+    //Setter and Getters
+    public int getNetWorth() {
+        return netWorth;
+    }
+
+    public void setNetWorth(int netWorth) {
+        this.netWorth = netWorth;
+    }
+
+    public int getHealthPoints() {
+        return this.health;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public int getChildren() {
+        return this.children;
     }
 
     public int getStrength() {
@@ -246,24 +319,43 @@ public class Person {
         return this.creativity;
     }
 
-    public int getAge() {
-        return this.age;
+    public boolean hasEducation() {
+        return education;
+    }
+
+    public void setEducation(boolean b) {
+        this.education = b;
+    }
+
+    public boolean isMarried() {
+        return isMarried;
+    }
+
+    private void setMarried(boolean b) {
+        this.isMarried = b;
     }
 
     public void setPrivilege(boolean b) {
         this.hasPrivilege = b;
     }
 
-    public void removePartner() {
-
-        partner = null;
-
+    public Careers getCareer() {
+        return this.career;
     }
 
-    public void addDivorce() {
+    public void setCareer(Careers career) {
+        this.career = career;
+    }
 
-        removePartner();
-        setMarried(false);
+    public Person getPartner() {
+        return partner;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String playerName) {
+        this.name = playerName;
     }
 }

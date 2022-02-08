@@ -16,12 +16,13 @@ public class Art {
     //Business Method
 
     /**
-     * Reads from art.json file to load ASCII art to artMap field above. Using JSON.simple.
+     * Reads from art.json file to load ASCII art to artMap field above
      * @return A Map with category name as key and the ASCII art as the value.
      */
     private static Map<String, String> loadArt() {
 
         Map<String, String> tempArtMap = new HashMap<>();
+        //Using static method readJsonObject() from SceneContainer class to read from external file and returning JSONObject
         JSONObject fileData = SceneContainer.readJsonObject("scenes/art"  + ".json");
 
         for(String category: fileData.keySet()) {
