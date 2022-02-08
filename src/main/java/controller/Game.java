@@ -3,6 +3,9 @@ package controller;
 import models.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import view.MainFrame;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +16,11 @@ public class Game {
     Person player = new Person();
     private static final String os = System.getProperty("os.name").toLowerCase();
     boolean isWindows = System.getProperty("os.name").contains("Windows");
+    private MainFrame mainFrame = new MainFrame();
+
+    public Game () {
+        setAllActionListeners();
+    }
 
     public void execute() {
 
@@ -407,10 +415,14 @@ public class Game {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 
+    private void setAllActionListeners () {
+        mainFrame.playButton.addActionListener(e -> execute());
+        mainFrame.exitButton.addActionListener(e -> System.out.println("Exiting game"));
+        mainFrame.loadButton.addActionListener(e -> System.out.println("Loading game"));
+        mainFrame.helpButton.addActionListener(e -> helpMenu());
+    }
 
 }
 
