@@ -7,30 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Scene {
+    //Fields
     private final String prompt;
     private final List<String> options, outcomes;
     private final List<Map<String, Object>> effects;
     private boolean hasBeenUsed = false;
-
     private String category;
 
-    public String getPrompt() {
-        return prompt;
-    }
-
-    public List<String> getOptions() {
-        return options;
-    }
-
-    public List<String> getOutcomes() {
-        return outcomes;
-    }
-
-    public List<Map<String, Object>> getEffects() {
-        return effects;
-    }
-
-
+    //Constructors
     public Scene(String prompt, List<String> options, List<String> outcomes, List<Map<String, Object>> effects) {
         this.prompt = prompt;
         this.options = options;
@@ -38,6 +22,20 @@ public class Scene {
         this.effects = effects;
     }
 
+    //Business Methods
+
+    /**
+     * Returns a newly created Scene object using data withing the JSONObject.
+     * @param json JSONObject in this format
+     *                  {
+     *                  'prompt' : "......",
+     *                  'options' : [".......", "......" , ...],
+     *                  'outcomes' : [".......", "......" , ...],
+     *                  'effects': [{'key': 'value'}, {'key': 'value'} , ...]
+     *                  }
+     *
+     * @return newly created Scene Object.
+     */
     public static Scene fromJson(JSONObject json) {
         List<String> options = new ArrayList<>();
         for (Object option : json.getJSONArray("options"))
@@ -57,12 +55,31 @@ public class Scene {
         return new Scene(json.getString("prompt"), options, outcomes, effects);
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
+    /**
+     * Returns ASCII art using Art class static method 'getArt()' passing in the
+     * desired category (String) name (Available names: backstory, career, children, education, health, partner, privilege)
+     * @return ASCII art as a String
+     */
     public String getArt() {
         return Art.getArt(category);
+    }
+
+    //Setters and Getters
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public List<String> getOutcomes() {
+        return outcomes;
+    }
+
+    public List<Map<String, Object>> getEffects() {
+        return effects;
     }
 
     public void setHasBeenUsed(boolean b){
@@ -72,4 +89,9 @@ public class Scene {
     public boolean hasBeenUsed() {
         return this.hasBeenUsed;
     }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }
