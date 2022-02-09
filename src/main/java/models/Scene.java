@@ -56,8 +56,9 @@ public class Scene {
     }
 
     /**
-     * Returns ASCII art using Art class static method 'getArt()' passing in the
-     * desired category (String) name (Available names: backstory, career, children, education, health, partner, privilege)
+     * Returns ASCII art using Art class static method 'getArt()'.
+     * Inside method: desired category (String) name (Available names: backstory, career, children,
+     * education, health, partner, privilege) is passed to static method.
      * @return ASCII art as a String
      */
     public String getArt() {
