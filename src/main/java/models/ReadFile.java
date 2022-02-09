@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ReadFile {
+    //Fields
     private String[] StringArray;
-    public ReadFile(String line)//Constructor
-    {
+
+    //Constructors
+    public ReadFile(String line) {
         try
         {
             File file = new File(line);
@@ -40,6 +42,7 @@ public class ReadFile {
         }
     }
 
+    //Setters and Getters
     public String[] getStringArray() {
         return StringArray;
     }
@@ -48,8 +51,8 @@ public class ReadFile {
         StringArray = stringArray;
     }
 
-    public String toString()//Method
-    {
+    //toString Method
+    public String toString() {
         String output = "";
         for(String getString : this.StringArray)
         {

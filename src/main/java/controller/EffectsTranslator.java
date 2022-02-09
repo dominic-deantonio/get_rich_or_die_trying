@@ -7,6 +7,11 @@ import java.util.Map;
 
 public class EffectsTranslator {
 
+    /**
+     * No Return value method completes a player action based on effects in Scene instance.
+     * @param player Person instance
+     * @param effect Scene instance 'effects' field Map values.
+     */
     public static void doEffects(Person player, Map<String, Object> effect) {
 
         for (String action : effect.keySet()) {
@@ -46,6 +51,11 @@ public class EffectsTranslator {
 
     }
 
+    /**
+     * Parameter (attribute) determine which field in the Person instance is incremented.
+     * @param player parameter(Player Object)
+     * @param attribute parameter(String) Options: 'strength', 'intellect', 'creativity'
+     */
     public static void getAttribute(Person player, String attribute) {
 
         switch (attribute) {
