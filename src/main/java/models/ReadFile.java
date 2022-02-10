@@ -5,8 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class ReadFile {
     //Fields
@@ -21,16 +20,16 @@ public class ReadFile {
             BufferedReader Reader = new BufferedReader(Read);
             String ln;
             int num = 0;
-            String build = "";
+            StringBuilder build = new StringBuilder();
             try {
                 while((ln=Reader.readLine())!=null)
                 {
-                    build+=ln;
-                    build+="\n";
+                    build.append(ln);
+                    build.append("\n");
                     num++;
                 }
                 //setStringArray(build.split("\n"));
-                StringArray = build.split("\n");
+                StringArray = build.toString().split("\n");
                 Read.close();
             } catch (IOException e) {
 
@@ -53,23 +52,13 @@ public class ReadFile {
 
     //toString Method
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for(String getString : this.StringArray)
         {
-            output+=getString;
-            output+="\n";
+            output.append(getString);
+            output.append("\n");
         }
         //return Arrays.toString(StringArray);Print out array on one line
-        return output;
-    }
-
-    public static void main(String[] args)
-    {
-        /*ReadFile read = new ReadFile("test.txt");
-        for(String str: read.getStringArray())
-        {
-            System.out.println(str);
-        }
-        System.out.println(read.toString());*/
+        return output.toString();
     }
 }
