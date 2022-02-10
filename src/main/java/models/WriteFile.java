@@ -3,8 +3,7 @@ package models;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
+
 
 public class WriteFile {
     //Fields
@@ -27,7 +26,7 @@ public class WriteFile {
 
     /**
      * No Return value
-     * @param appendFile Content that needs to be appended to the exisiting file
+     * @param appendFile Content that needs to be appended to the existing file
      */
     public void saveFile(boolean appendFile) {
         try
@@ -62,7 +61,7 @@ public class WriteFile {
     }
 
     /*
-     * Make a check using CreateNewFile() method to see if abstract file path does not exists and
+     * Makes a check using createNewFile() method to see if abstract file path does not exist and
      * uses existing file to update with new data by calling method saveFile()
      * Saves players 5-year summary
      */
@@ -70,7 +69,7 @@ public class WriteFile {
         File file = new File(fileName);
         try
         {
-            if(file.createNewFile() == true)
+            if(file.createNewFile())
             {
                 System.out.println("Your game has been saved .");
                 FileWriter writeFile = new FileWriter(fileName);
