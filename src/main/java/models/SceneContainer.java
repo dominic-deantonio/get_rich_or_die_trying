@@ -63,7 +63,7 @@ public class SceneContainer {
     /**
      * Return JSONObject after reading an external .json file
      * @param path Path of external file
-     * @return JSONObject which can then be deconstructe
+     * @return JSONObject which can then have values unpacked
      */
     public static JSONObject readJsonObject(String path) {
         File file = new File(path);
@@ -86,7 +86,7 @@ public class SceneContainer {
      */
     public Scene getRandomScene(Person player) {
 
-        Scene sceneToUse = null;
+        Scene sceneToUse;
         int attemptsToRandomize = 0;
         final int MAX_ATTEMPTS = 100;
         do {
