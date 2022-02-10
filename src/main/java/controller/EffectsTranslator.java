@@ -1,8 +1,6 @@
 package controller;
 
 import models.Person;
-import models.Scene;
-
 import java.util.Map;
 
 public class EffectsTranslator {

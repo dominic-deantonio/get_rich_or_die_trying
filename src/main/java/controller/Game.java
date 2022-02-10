@@ -83,7 +83,7 @@ public class Game {
                 "                                                                                                                                                     |  $$$$$$/              |  $$$$$$/\n" +
                 "                                                                                                                                                      \\______/                \\______/ \n";
         System.out.println(art);
-        System.out.println("Welcome to Get Rich Or Die Trying.\nAt a young age you realize that you want to be a millionaire.\nYour mission is to make $1 million before all your health points run out.\n Each choice you make will affect your net worth and health levels.");
+        System.out.println("Welcome to Get Rich Or Die Trying.\nAt a young age you realize that you want to be a millionaire.\nYour mission is to make $1 million before all your health points run out.\nEach choice you make will affect your net worth and health levels.");
         System.out.println("\nPress any key to continue.");
         getInput();
         clearScreen();
@@ -133,19 +133,19 @@ public class Game {
     public void checkSaveFile() {
         File checkFile = new File("saveFile.txt");
         try {
-            if (checkFile.exists() == true) {
+            if (checkFile.exists()) {
                 System.out.println("Enter name of player...");
                 String playerSavedName = getInput();
                 System.out.println(playerSavedName);
                 ReadFile read = new ReadFile("saveFile.txt");
-                String info = "";
+                StringBuilder info = new StringBuilder();
                 for (String str : read.getStringArray()) {
                     int i = 0;
                     if (str.toUpperCase().contains(playerSavedName.toUpperCase())) {
                         System.out.println("Found name");
                         for (String str1 : read.getStringArray()) {
-                            info += str1;
-                            info += "\n";
+                            info.append(str1);
+                            info.append("\n");
                             if (str.contains("+") && i > 0) {
                                 break;
                             }
@@ -153,13 +153,11 @@ public class Game {
                         }
                     }
                 }
-                String[] infoArray = info.split("\n");
-                for (int i = 0; i < infoArray.length; i++) {
-                    System.out.println(infoArray[i]);
+                String[] infoArray = info.toString().split("\n");
+                for (String s : infoArray) {
+                    System.out.println(s);
                 }
                 //System.out.println(read.toString());
-            } else if (checkFile.exists() == false) {
-                //System.out.println("File does not exist");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -255,7 +253,7 @@ public class Game {
                 jsonString.append(reader.nextLine());
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
         return new JSONArray(jsonString.toString());
@@ -264,7 +262,7 @@ public class Game {
     /**
      * Methods runs through the sequence of Backstory events (read from external file), based on response
      * from each backstory event, player's (Player Object) strength, intellect, or creativity field is updated.
-     * @param backstories List datastructure holding Backstory instances.
+     * @param backstories List datastructures holding Backstory instances.
      */
     private void processBackstories(List<Backstory> backstories) {
         //For loop the handle every backstory scene
@@ -291,10 +289,14 @@ public class Game {
             }
             System.out.println();
             //Prints out the value in the 'outcome' field inside selectedBackstoryOption (BackstoryOption instance) variable.
-            System.out.println(selectedBackstoryOption.getOutcome());
+            if (selectedBackstoryOption != null) {
+                System.out.println(selectedBackstoryOption.getOutcome());
+            }
             //Using selectedBackstoryOption (BackstoryOption instance) to obtain 'attribute' field then calling
             //getAttribute() of EffectsTranslator class.
-            EffectsTranslator.getAttribute(player, selectedBackstoryOption.getAttribute());
+            if (selectedBackstoryOption != null) {
+                EffectsTranslator.getAttribute(player, selectedBackstoryOption.getAttribute());
+            }
             System.out.println("\nPress any key to continue or help for additional instructions");
             getInput();
             clearScreen();
@@ -396,7 +398,7 @@ public class Game {
     }
 
     /**
-     *Method that performs effects in Scene object based on options index reponse by user.
+     *Method that performs effects in Scene object based on options index response by user.
      * @param index Index value of user input.
      * @param currentScene Scene instance.
      */
@@ -505,11 +507,12 @@ public class Game {
 
     //doesn't clear the scroll bar
     public void clearScreen() {
-        ProcessBuilder var0 = os.contains("windows") ? new ProcessBuilder(new String[]{"cmd", "/c", "cls"}) : new ProcessBuilder(new String[]{"clear"});
+        ProcessBuilder var0 = os.contains("windows") ? new ProcessBuilder("cmd", "/c", "cls") : new ProcessBuilder("clear");
 
         try {
             var0.inheritIO().start().waitFor();
         } catch (InterruptedException var2) {
+            System.out.println(var2.getMessage());
         } catch (IOException var3) {
             var3.printStackTrace();
         }

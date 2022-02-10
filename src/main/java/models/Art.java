@@ -1,15 +1,13 @@
 package models;
 
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import static models.SceneContainer.readJsonObject;
 
 public class Art {
     //Fields
-    private static Map<String, String> artMap = loadArt();
+    private static final Map<String, String> artMap = loadArt();
     //Constructors
 
 
@@ -33,7 +31,7 @@ public class Art {
 
     /**
      * Returns ASCII art from Map (artMap field) using the (String) name of category as key
-     * @param category Name of desired category name :(Available names: backstory, career, children, education, health, partner, privilege)
+     * @param category Name of desired category name :Available names: backstory, career, children, education, health, partner, privilege.
      * @return ASCII art as a String
      */
     public static String getArt(String category) {
