@@ -33,7 +33,7 @@ public class Game {
         //It also runs through the backstory sequence
         getPlayerBasicData();
         clearScreen();
-        //Begins cycle of the BackStory file
+        //Runs through Career scene
         runSceneOneCareer(player);
 
         while (shouldPlay()) {
@@ -44,7 +44,7 @@ public class Game {
             System.out.println(currentScene.getArt());
             System.out.println("\n+++++++ 5 years later +++++++");
             //For every scene the user goes through age is increased by 5
-            player.addAge(5);
+            System.out.println(player.addAge(5));
             // handles the individual scene prompting, handling user response and returning index of response.
             int input = prompt(currentScene);
             clearScreen();
@@ -219,7 +219,7 @@ public class Game {
         System.out.printf("Your name is %s. You chose to %s college.", playerName, userWantsCollege ? "go to" : "skip");
 
         if (userWantsCollege)
-            player.addMoney(-100000);
+            player.adjustNetWorth(-100000);
 
         player.setName(playerName);
         player.setEducation(userWantsCollege);

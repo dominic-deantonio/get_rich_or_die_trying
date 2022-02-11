@@ -73,82 +73,88 @@ public class Person {
     }
 
     /**
-     * Adds amountToAdd value into netWorth variable after being multiplied by a random modifier value.
-     * Prints a formatted String with modified value after applying modifier.
-     * @param amountToAdd Amount to be added to netWorth variable.
+     * Adds adjustmentAmount value into netWorth variable after being multiplied by a random modifier value.
+     * @param adjustmentAmount Amount to be adjusted(negative and positive value are accepted) to netWorth variable.
+     * @return   Prints a formatted String with modified value after applying modifier.
      */
-    public void addMoney(int amountToAdd) {
+    public String adjustNetWorth(int adjustmentAmount) {
         double randModifier = new Random().nextDouble() * (1.25d - .75d) + .75d;
-        int modifiedAmountToAdd = (int) (amountToAdd * randModifier);
+        int modifiedAmountToAdd = (int) (adjustmentAmount * randModifier);
         netWorth += modifiedAmountToAdd;
-        final String msg = String.format("You have %s %s from your choice", (amountToAdd < 0 ? "lost" : "gained"), money.format(modifiedAmountToAdd));
-        System.out.println(msg);
+        return String.format("You have %s %s from your choice", (adjustmentAmount < 0 ? "lost" : "gained"), money.format(modifiedAmountToAdd));
     }
 
     /**
-     * Adds value to health variable, if new value make health value over 100 value is adjusted to equal 100.
-     * Print message if Player lost(negative value) or gained(positive value) and value passed in as parameter.
+     * Adjusts value to health variable, value is adjusted based on parameter value, positive and negative value are
+     * accepted, If parameter value make value over 100, then health value is adjusted to max value of 100.
+     * If, parameter value make value under 0, then health value is adjusted to min value of 0.
      * @param value value being added to health variable.
+     * @return String Message if Player lost(negative value) or gained(positive value) and value passed in as parameter.
      */
-    public void addHealth(int value) {
+    public String adjustHealth(int value) {
         health += value;
-        if (health > 100)
+        if (health > 100){
             health = 100;
-        String gained = value < 0 ? "lost" : "gained";
-        String msg = String.format("You have %s %d health", gained, value);
-        System.out.println(msg);
+        }
+        if (health < 0){
+            health = 0;
+        }
 
+        String gained = value < 0 ? "lost" : "gained";
+        return String.format("You have %s %d health points.", gained, Math.abs(value));
     }
 
     /**
      * Creates a new Person object that will represent the Partner, He is automatically named 'Sam'.
      * @param value int value that represents the Partners net worth.
+     * @return Formatted String message with new partners name.
      */
-    public void addPartner(int value) {
+    public String addPartner(int value) {
+        String stringMsg ="";
         if (partner == null) {
             partner = new Person("Sam", value);
-
-            final String msg = String.format("You have a new partner named %s", partner.name);
-            System.out.println(msg);
+            stringMsg = String.format("You have a new partner named %s", partner.name);
         }
-
+        return stringMsg;
     }
 
     /**
      * Setts Person object variable to specific values to indicate marriage is over.
      * partner (Person object) variable to null.
      * isMarried variable set to false.
-     * @param value N/A
+     * @return String message indicating 'break up' including name of partner.
      */
-    public void breakUp(int value) {
+    public String breakUp() {
         this.partner = null;
         this.isMarried = false;
-        System.out.println("You and Sam have broken up.");
+        return "You and Sam have broken up.";
     }
 
     /**
      * Sets Person object variables to specific value to indicate marriage.
      * setMarried variable set to 'true'.
      * partner (Person) object's isMarried variable set to 'true'.
-     * @param value N/A
+     * @return Formatted String indicating marriage
      */
-    public void marryPartner(int value) {
+    public String marryPartner() {
+        String msg="You need a partner before you can get married.";
         if (partner != null) {
             this.setMarried(true);
             partner.setMarried(true);
-            System.out.println("You have married your partner, Sam");
+            msg = "You have married your partner, Sam";
         }
+        return msg;
     }
 
     /**
-     * Increments children variable value by parameter value.
-     * @param value Number of children being incremented to current children variable value.
+     * Increments children variable numOfChildren by parameter numOfChildren.
+     * @param numOfChildren Number of children being incremented to current children variable numOfChildren.
+     * @return String message indicating the number of children added.
      */
-    public void addChild(int value) {
-        children += value;
-        String some = value > 1 ? "children" : "child";
-        String msg = String.format("You have gained %d %s", value, some);
-        System.out.println(msg);
+    public String addChild(int numOfChildren) {
+        children += numOfChildren;
+        String some = numOfChildren > 1 ? "children" : "child";
+        return String.format("You have gained %d %s.", numOfChildren, some);
     }
 
     /**
@@ -156,12 +162,12 @@ public class Person {
      * Used Careers ENUM class.
      * Prints message indicating old value and new value.
      * @param value new career value
+     * @return String message indicating the career change.
      */
-    public void changeCareer(int value) {
+    public String changeCareer(int value) {
         String oldCareer = career.name();
         career = Careers.values()[value];
-        final String msg = String.format("Your career has changed from %s to %s", oldCareer, career.toString());
-        System.out.println(msg);
+        return String.format("Your career has changed from %s to %s", oldCareer, career.toString());
     }
 
     /**
@@ -169,18 +175,19 @@ public class Person {
      * If age value after addition is more than 50, then random amount is deducted from health variable.
      * @param i value of age increase
      */
-    public void addAge(int i) {
+    public String addAge(int i) {
         age += i;
-
+        StringBuilder msg = new StringBuilder();
         if (age > 50) {
             Random rand = new Random();
             int amountHealthToDecrease = -(rand.nextInt(15) + 1);
-            System.out.println("You are getting older and losing health.");
-            addHealth(amountHealthToDecrease);
+            msg.append("You are getting older and losing health.\n");
+            adjustHealth(amountHealthToDecrease);
         }
 
-        String msg = String.format("You are now %d years old.", age);
-        System.out.println(msg);
+        String msg2 = String.format("You are now %d years old.", age);
+        msg.append(msg2);
+        return msg.toString();
     }
 
     /**
@@ -279,9 +286,11 @@ public class Person {
     /**
      * Calls on removePartner() and sets married field to 'false'.
      */
-    public void addDivorce() {
+    public String addDivorce() {
+
         removePartner();
         setMarried(false);
+        return "The divorce to your significant other is now complete, assets have been distributed accordingly.";
     }
 
 
