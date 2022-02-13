@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
     //Fields - STATIC FINAL VARIABLES
@@ -15,6 +16,7 @@ public class Game {
     //Fields
     SceneContainer scenes;
     Person player = new Person();
+    Map<String,Person> listPlayer;
     boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     //constructors
@@ -25,16 +27,20 @@ public class Game {
     public void execute() {
         //creates a Map Filed for each external category file. Using Scene instances fill in various scenes(Scene Instances)
         scenes = new SceneContainer();
+        listPlayer = scenes.getUsers();
         //Prints Welcome ASCII art banner
         welcome();
         //Checks to see if there is a saved file to read in previous score.
-        checkSaveFile();
-        //Initializes Person instance with various prompts to obtain values.
-        //It also runs through the backstory sequence
-        getPlayerBasicData();
-        clearScreen();
-        //Runs through Career scene
-        runSceneOneCareer(player);
+//        checkSaveFile();
+        if (!doesPlayerExist()){
+            //Initializes Person instance with various prompts to obtain values.
+            //It also runs through the backstory sequence
+            getPlayerBasicData();
+            clearScreen();
+            //Runs through Career scene
+            runSceneOneCareer(player);
+        }
+
 
         while (shouldPlay()) {
             clearScreen();
@@ -107,7 +113,8 @@ public class Game {
                 this.helpMenu();
             //Scenario two: User types 'quit' (Case does not matter).
             if (userInput.equalsIgnoreCase("quit")) {
-                System.out.println("Quitting game");
+                scenes.saveUsers(player);
+                System.out.println("Quitting game.!");
                 System.exit(1);
                 return "";
             }
@@ -126,6 +133,23 @@ public class Game {
                 System.out.println(selection);
         }
     }
+
+    public boolean doesPlayerExist(){
+        boolean playerExists = false;
+        System.out.println("Enter previous user name...:");
+        String playerSavedName = getInput();
+        if (listPlayer.containsKey(playerSavedName)){
+            System.out.println("\n\nPlayer Found! You will continue where you left off...");
+            player = listPlayer.get(playerSavedName);
+            playerExists = true;
+        }
+        else {
+            System.out.println("\nPlayer name was not found! New player record will be created.");
+        }
+        return playerExists;
+    }
+
+
 
     /**
      * Method used to validate if saveFile.txt exits in local machine.
@@ -453,8 +477,9 @@ public class Game {
         }
 
         if (askToSave.equalsIgnoreCase("save")) {
-            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
-            saveGame.save();
+//            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
+            scenes.saveUsers(player);
+//            saveGame.save();
         }
     }
 
