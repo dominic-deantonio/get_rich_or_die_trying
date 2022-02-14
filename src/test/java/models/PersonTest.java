@@ -99,6 +99,6 @@ class PersonTest {
 
     @Test
     void testAddingDivorceMethod_shouldReturnStringMessageIndicatingDivorceIsCompleted() {
-        assertEquals("Your divorce to your significant other is now complete, assets have been distributed accordingly.", player.addDivorce());
+        assertEquals("The divorce to your significant other is now complete, assets have been distributed accordingly.", player.addDivorce());
     }
 }

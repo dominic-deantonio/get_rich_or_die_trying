@@ -11,6 +11,7 @@ public class SceneContainer {
     private final Random random = new Random();
     private final List<Map<String, List<Scene>>> categories = new ArrayList<>();
     private Map<String, Person> users;
+    private String dataBasePath = "userStorage.json";
 
     //Constructors
     public SceneContainer() {
@@ -28,7 +29,7 @@ public class SceneContainer {
         categories.add(privilege);
         categories.add(health);
         categories.add(children);
-        loadUsers();
+        loadUsers(getDataBasePath());
 
     }
 
@@ -130,9 +131,9 @@ public class SceneContainer {
     /**
      * Method will read external file containing previous users. If not file is found then new file is created.
      */
-    private void loadUsers() {
+    public void loadUsers(String fileName) {
         //name of file to store users.
-        String fileName = "userStorage.json";
+
         //Temporary Map to hold previous user when they are being read from external file.
         HashMap<String, Person> userLoader = new HashMap<>();
         String name;
@@ -231,7 +232,6 @@ public class SceneContainer {
 
                 jsonObject.put(userKey, playerString);
             }
-            System.out.println(jsonObject.toString());
             result = jsonObject.toString().replace("\"{", "{").replace("\\", "").replace("}\",\"", "},\"").replace("}\"}", "}}");
 
 
@@ -249,5 +249,9 @@ public class SceneContainer {
 
     public void setUsers(Map<String, Person> users) {
         this.users = users;
+    }
+
+    public String getDataBasePath() {
+        return dataBasePath;
     }
 }
