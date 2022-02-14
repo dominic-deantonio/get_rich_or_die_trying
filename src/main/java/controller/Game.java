@@ -54,9 +54,11 @@ public class Game {
             System.out.println("\n+++++++ 5 years later +++++++");
             //For every scene the user goes through age is increased by 5
             System.out.println(player.addAge(5));
+            System.out.println(player.getPlayerInformation());
             // handles the individual scene prompting, handling user response and returning index of response.
             int input = prompt(currentScene);
             clearScreen();
+            System.out.println(player.getPlayerInformation());
             // display outcome of scene based on user response.
             displayOutcome(input, currentScene);
             // applies effect based on user response

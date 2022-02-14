@@ -57,6 +57,12 @@ public class Person {
 
     //Business Methods
 
+    public String getPlayerInformation(){
+        return "******************************************************************************************\n" +
+                "\t" + "Player name: " + getName()   + "\t NetWorth: " + getPrettyNetWorth() + "\t Current Age: " + getAge() + "\t Health Status: " + getHealth() + " \n" +
+                "******************************************************************************************\n" ;
+    }
+
     /**
      * Returns a String value of the Persons netWorth variable in a format that include dollar sign ($)
      * using .format().
