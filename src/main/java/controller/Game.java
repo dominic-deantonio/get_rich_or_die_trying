@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
     //Fields - STATIC FINAL VARIABLES
@@ -17,6 +16,7 @@ public class Game {
     SceneContainer scenes;
     Person player = new Person();
     Map<String,Person> listPlayer;
+    private boolean doesPlayerExist = false;
     boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     //constructors
@@ -32,7 +32,10 @@ public class Game {
         welcome();
         //Checks to see if there is a saved file to read in previous score.
 //        checkSaveFile();
-        if (!doesPlayerExist()){
+        String result = retrievePreviousSession();
+        System.out.println(result);
+
+        if (!doesPlayerExist){
             //Initializes Person instance with various prompts to obtain values.
             //It also runs through the backstory sequence
             getPlayerBasicData();
@@ -134,22 +137,20 @@ public class Game {
         }
     }
 
-    public boolean doesPlayerExist(){
-        boolean playerExists = false;
+    public String retrievePreviousSession(){
+       String resultString;
         System.out.println("Enter previous user name...:");
         String playerSavedName = getInput();
         if (listPlayer.containsKey(playerSavedName)){
-            System.out.println("\n\nPlayer Found! You will continue where you left off...");
+            resultString = "\n\nPlayer Found! You will continue where you left off...";
             player = listPlayer.get(playerSavedName);
-            playerExists = true;
+            doesPlayerExist = true;
         }
         else {
-            System.out.println("\nPlayer name was not found! New player record will be created.");
+            resultString = "\nPlayer name was not found! New player record will be created.";
         }
-        return playerExists;
+        return resultString;
     }
-
-
 
     /**
      * Method used to validate if saveFile.txt exits in local machine.
