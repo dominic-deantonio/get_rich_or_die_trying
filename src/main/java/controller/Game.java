@@ -15,6 +15,8 @@ public class Game {
     //Fields
     SceneContainer scenes;
     Person player = new Person();
+    Map<String,Person> listPlayer;
+    private boolean doesPlayerExist = false;
     boolean isWindows = System.getProperty("os.name").contains("Windows");
 
     //constructors
@@ -25,16 +27,23 @@ public class Game {
     public void execute() {
         //creates a Map Filed for each external category file. Using Scene instances fill in various scenes(Scene Instances)
         scenes = new SceneContainer();
+        listPlayer = scenes.getUsers();
         //Prints Welcome ASCII art banner
         welcome();
         //Checks to see if there is a saved file to read in previous score.
-        checkSaveFile();
-        //Initializes Person instance with various prompts to obtain values.
-        //It also runs through the backstory sequence
-        getPlayerBasicData();
-        clearScreen();
-        //Runs through Career scene
-        runSceneOneCareer(player);
+//        checkSaveFile();
+        String result = retrievePreviousSession();
+        System.out.println(result);
+
+        if (!doesPlayerExist){
+            //Initializes Person instance with various prompts to obtain values.
+            //It also runs through the backstory sequence
+            getPlayerBasicData();
+            clearScreen();
+            //Runs through Career scene
+            runSceneOneCareer(player);
+        }
+
 
         while (shouldPlay()) {
             clearScreen();
@@ -107,7 +116,8 @@ public class Game {
                 this.helpMenu();
             //Scenario two: User types 'quit' (Case does not matter).
             if (userInput.equalsIgnoreCase("quit")) {
-                System.out.println("Quitting game");
+                scenes.saveUsers(player);
+                System.out.println("Quitting game.!");
                 System.exit(1);
                 return "";
             }
@@ -125,6 +135,26 @@ public class Game {
             for (String selection : selections)
                 System.out.println(selection);
         }
+    }
+
+    /**
+     * Method that looks for current users previous session using name as the key and returning a result message.
+     * @return String message that defines the result of the search.
+     */
+    public String retrievePreviousSession(){
+       String resultString;
+        System.out.println("Enter previous user name...:");
+        String playerSavedName = getInput();
+        if (listPlayer.containsKey(playerSavedName)){
+            resultString = "\n\nPlayer Found! You will continue where you left off...";
+            player = listPlayer.get(playerSavedName);
+            //Sets the boolean variable to true, so that player can continue with previous session.
+            doesPlayerExist = true;
+        }
+        else {
+            resultString = "\nPlayer name was not found! New player record will be created.";
+        }
+        return resultString;
     }
 
     /**
@@ -453,8 +483,9 @@ public class Game {
         }
 
         if (askToSave.equalsIgnoreCase("save")) {
-            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
-            saveGame.save();
+//            WriteFile saveGame = new WriteFile("saveFile.txt", displaySceneSummary(""));
+            scenes.saveUsers(player);
+//            saveGame.save();
         }
     }
 

@@ -24,6 +24,37 @@ public class Person {
         this.netWorth = initialWorth;
     }
 
+    public Person(int netWorth, int health, int age, int children, int strength, int intellect, int creativity, Boolean education, Boolean isMarried, Boolean hasPrivilege, Careers career, Person partner, String name) {
+        this.netWorth = netWorth;
+        this.health = health;
+        this.age = age;
+        this.children = children;
+        this.strength = strength;
+        this.intellect = intellect;
+        this.creativity = creativity;
+        this.education = education;
+        this.isMarried = isMarried;
+        this.hasPrivilege = hasPrivilege;
+        this.career = career;
+        this.partner = partner;
+        this.name = name;
+    }
+
+    public Person(int netWorth, int health, int age, int children, int strength, int intellect, int creativity, Boolean education, Boolean isMarried, Boolean hasPrivilege, Careers career, String name) {
+        this.netWorth = netWorth;
+        this.health = health;
+        this.age = age;
+        this.children = children;
+        this.strength = strength;
+        this.intellect = intellect;
+        this.creativity = creativity;
+        this.education = education;
+        this.isMarried = isMarried;
+        this.hasPrivilege = hasPrivilege;
+        this.career = career;
+        this.name = name;
+    }
+
     //Business Methods
 
     /**
@@ -296,6 +327,23 @@ public class Person {
 
 
     //Setter and Getters
+
+    public int getHealth() {
+        return health;
+    }
+
+    public Boolean getEducation() {
+        return education;
+    }
+
+    public Boolean getMarried() {
+        return isMarried;
+    }
+
+    public Boolean getHasPrivilege() {
+        return hasPrivilege;
+    }
+
     public int getNetWorth() {
         return netWorth;
     }
@@ -366,5 +414,25 @@ public class Person {
 
     public void setName(String playerName) {
         this.name = playerName;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "netWorth=" + netWorth +
+                ", health=" + health +
+                ", age=" + age +
+                ", children=" + children +
+                ", money=" + money +
+                ", strength=" + strength +
+                ", intellect=" + intellect +
+                ", creativity=" + creativity +
+                ", education=" + education +
+                ", isMarried=" + isMarried +
+                ", hasPrivilege=" + hasPrivilege +
+                ", career=" + career +
+                ", partner=" + partner +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
