@@ -57,6 +57,10 @@ public class Person {
 
     //Business Methods
 
+    /**
+     * Method that returns a Formatted banner with Name, net-worth, age, and health.
+     * @return Formatted String
+     */
     public String getPlayerInformation(){
         return "******************************************************************************************\n" +
                 "\t" + "Player name: " + getName()   + "\t NetWorth: " + getPrettyNetWorth() + "\t Current Age: " + getAge() + "\t Health Status: " + getHealth() + " \n" +
