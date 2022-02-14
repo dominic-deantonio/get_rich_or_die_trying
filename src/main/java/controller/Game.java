@@ -137,6 +137,10 @@ public class Game {
         }
     }
 
+    /**
+     * Method that looks for current users previous session using name as the key and returning a result message.
+     * @return String message that defines the result of the search.
+     */
     public String retrievePreviousSession(){
        String resultString;
         System.out.println("Enter previous user name...:");
@@ -144,6 +148,7 @@ public class Game {
         if (listPlayer.containsKey(playerSavedName)){
             resultString = "\n\nPlayer Found! You will continue where you left off...";
             player = listPlayer.get(playerSavedName);
+            //Sets the boolean variable to true, so that player can continue with previous session.
             doesPlayerExist = true;
         }
         else {
