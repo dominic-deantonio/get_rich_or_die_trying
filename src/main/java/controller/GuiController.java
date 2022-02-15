@@ -8,15 +8,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import models.Backstory;
+import models.BackstoryOption;
+import models.Person;
 import view.GuiApp;
+
+import java.util.List;
 
 public class GuiController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    private final Person player = new Person();
+    private final Game game = new Game();
+    private final EffectsTranslator effectsTranslator = new EffectsTranslator();
+    BackstoryController bsController = new BackstoryController();
+    private int backstoryRound = 0;
 
     @FXML
     private Label loadLabel;
@@ -27,44 +40,53 @@ public class GuiController {
     @FXML
     private TextField loadText;
 
+
+    @FXML
+    private ToggleGroup difficulty;
+
+    @FXML
+    private Button newGameNext;
+
+    @FXML
+    private TextField ngName;
+
+    @FXML
+    void newGameNextPressed(ActionEvent event) {
+        String name = ngName.getText();
+        RadioButton selected = (RadioButton) difficulty.getSelectedToggle();
+        String diff = selected.getText();
+        player.setName(name);
+        if (diff.toLowerCase().startsWith("w")){
+            player.setPrivilege(false);
+        }else {
+            player.setPrivilege(true);
+        }
+        loadScene(event,"backstory");
+        bsController.startBackstory(backstoryRound);
+    }
+
+
+
+
     @FXML
     void loadSubmitPressed(ActionEvent event) {
 
     }
 
-    @FXML
-    private Button backstoryButton1;
-
-    @FXML
-    private Button backstoryButton2;
-
-    @FXML
-    private Button backstoryButton3;
-
-    @FXML
-    private Label backstoryLabel1;
-
-    @FXML
-    private Label backstoryLabel2;
-
-    @FXML
-    void button1Pressed(ActionEvent event) {
-
-    }
-    @FXML
-    void button2Pressed(ActionEvent event) {
-
-    }
-
-    @FXML
-    void button3Pressed(ActionEvent event) {
-
-    }
 
     @FXML
     public void switchToNewGameScene(ActionEvent event) {
+        loadScene(event,"newGame");
+    }
+
+    @FXML
+    public void switchToLoadGameScene(ActionEvent event) {
+        loadScene(event,"loadGame");
+    }
+
+    private void loadScene(ActionEvent event, String sceneChosen){
         try {
-            Parent root = FXMLLoader.load(GuiApp.class.getResource("newGame.fxml"));
+            Parent root = FXMLLoader.load(GuiApp.class.getResource(sceneChosen+".fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root,1500, 1000);
             stage.setScene(scene);
@@ -74,18 +96,12 @@ public class GuiController {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void switchToLoadGameScene(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(GuiApp.class.getResource("loadGame.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root, 1500, 1000);
-            stage.setScene(scene);
-            stage.show();
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    @FXML
+    private void handleKeyReleased(){
+        String text = ngName.getText();
+        boolean disableButton = text.isEmpty() || text.trim().isEmpty();
+        newGameNext.setDisable(disableButton);
     }
 
 }
