@@ -22,14 +22,13 @@ import view.GuiApp;
 import java.util.List;
 
 public class GuiController {
-    private Stage stage;
-    private Scene scene;
+    private static Stage stage;
+    private static Scene scene;
     private Parent root;
     private final Person player = new Person();
     private final Game game = new Game();
     private final EffectsTranslator effectsTranslator = new EffectsTranslator();
-    BackstoryController bsController = new BackstoryController();
-    private int backstoryRound = 0;
+
 
     @FXML
     private Label loadLabel;
@@ -62,7 +61,6 @@ public class GuiController {
             player.setPrivilege(true);
         }
         loadScene(event,"backstory");
-        bsController.startBackstory(backstoryRound);
     }
 
 
@@ -84,7 +82,7 @@ public class GuiController {
         loadScene(event,"loadGame");
     }
 
-    private void loadScene(ActionEvent event, String sceneChosen){
+    static void loadScene(ActionEvent event, String sceneChosen){
         try {
             Parent root = FXMLLoader.load(GuiApp.class.getResource(sceneChosen+".fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

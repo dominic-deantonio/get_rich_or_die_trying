@@ -14,7 +14,7 @@ public class Game {
 
     //Fields
     SceneContainer scenes;
-    Person player = new Person();
+    static Person player = new Person();
     Map<String,Person> listPlayer;
     private boolean doesPlayerExist = false;
     boolean isWindows = System.getProperty("os.name").contains("Windows");
@@ -549,6 +549,9 @@ public class Game {
         }
     }
 
+    public static Person getPlayer() {
+        return player;
+    }
 }
 
 

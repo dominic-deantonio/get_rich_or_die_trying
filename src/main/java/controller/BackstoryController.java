@@ -1,14 +1,28 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import models.Backstory;
+import models.BackstoryOption;
+import models.Person;
+import view.GuiApp;
 
 import java.util.List;
 
+import static controller.Game.getBackStoryScenes;
+
 public class BackstoryController {
+    private Person player;
+    private final List<Backstory> backstories = getBackStoryScenes();
 
     public BackstoryController() {
+
     }
 
     @FXML
@@ -34,48 +48,53 @@ public class BackstoryController {
     private Button backstorySubmit;
 
     @FXML
-    private void BSSubmitPressed() {
+    private Button backstoryNext;
+
+    @FXML
+    void backstoryNextPressed(ActionEvent event) {
+        if (backstoryRound < 4){
+            backstoryLabel1.setText(backstories.get(backstoryRound).getPrompt());
+            backstoryButton1.setText(backstories.get(backstoryRound).getOptions().get(0).getText());
+            backstoryButton2.setText(backstories.get(backstoryRound).getOptions().get(1).getText());
+            backstoryButton3.setText(backstories.get(backstoryRound).getOptions().get(2).getText());
+            backstoryLabel2.setText("");
+            backstoryButton1.setDisable(false);
+            backstoryButton2.setDisable(false);
+            backstoryButton3.setDisable(false);
+            backstorySubmit.setDisable(true);
+            backstoryNext.setDisable(true);
+        } else {
+            GuiController.loadScene(event,"career");
+        }
+    }
+
+    @FXML
+    void buttonPressed(ActionEvent event) {
+        backstorySubmit.setDisable(false);
+    }
+
+    int backstoryRound = 0;
+
+    @FXML
+    private void BSSubmitPressed(ActionEvent event) {
         ToggleButton selected = (ToggleButton) backstoryChoice.getSelectedToggle();
+        String resp = selected.getText();
+        BackstoryOption optionSelected = null;
+            for (BackstoryOption option : backstories.get(backstoryRound).getOptions()) {
+                if (option.getText().contains(resp)) {
+                    optionSelected = option;
+                    break;
+                }
+            }
+        backstoryLabel2.setText(optionSelected.getOutcome());
+        EffectsTranslator.getAttribute(Game.getPlayer(), optionSelected.getAttribute());
+        backstoryRound++;
+        backstoryButton1.setDisable(true);
+        backstoryButton2.setDisable(true);
+        backstoryButton3.setDisable(true);
+        backstoryNext.setDisable(false);
 
     }
 
-    void startBackstory(int round) {
-        List<Backstory> backstories = Game.getBackStoryScenes();
-        String labelText = backstories.get(round).getPrompt();
-        String button1Text = backstories.get(round).getOptions().get(0).getText();
-        String button2Text = backstories.get(round).getOptions().get(1).getText();
-        String button3Text = backstories.get(round).getOptions().get(2).getText();
-        backstoryLabel1.setText(labelText);
-        backstoryButton1.setText(button1Text);
-        backstoryButton2.setText(button2Text);
-        backstoryButton3.setText(button3Text);
-//        for (Backstory story: backstories) {
-//            backstoryLabel1.setText(story.getPrompt());
-//            int counter = 1;
-//            for (BackstoryOption option: story.getOptions()) {
-//                if (counter == 1){
-//                    backstoryButton1.setText(option.getText());
-//                    counter++;
-//                } else if (counter == 2){
-//                    backstoryButton2.setText(option.getText());
-//                    counter++;
-//                } else {
-//                    backstoryButton3.setText(option.getText());
-//                    counter = 1;
-//                }
-//            }
-//            String resp = BSSubmitPressed();
-//            BackstoryOption optionSelected = null;
-//            for (BackstoryOption option : story.getOptions()) {
-//                if (option.getText().contains(resp)) {
-//                    optionSelected = option;
-//                    break;
-//                }
-//            }
-//            backstoryLabel2.setText(optionSelected.getOutcome());
-//            EffectsTranslator.getAttribute(player, optionSelected.getAttribute());
-
-        //}
-    }
 
 }
