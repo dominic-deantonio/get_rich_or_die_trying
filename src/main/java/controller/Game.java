@@ -14,7 +14,7 @@ public class Game {
 
     //Fields
     SceneContainer scenes;
-    Person player = new Person();
+    static Person player = new Person();
     Map<String,Person> listPlayer;
     private boolean doesPlayerExist = false;
     boolean isWindows = System.getProperty("os.name").contains("Windows");
@@ -262,7 +262,7 @@ public class Game {
      * insert them to a List<Backstory> type.
      * @return ArrayList<type=Backstory>
      */
-    private List<Backstory> getBackStoryScenes() {
+    static List<Backstory> getBackStoryScenes() {
         List<Backstory> backstories = new ArrayList<>();
         JSONArray fileData = readJsonArray("scenes/backstory.json");
         for (Object jsonBackstory : fileData) {
@@ -277,7 +277,7 @@ public class Game {
      * @param path String representation of path to desired file
      * @return JSONArray with data from external file.
      */
-    private JSONArray readJsonArray(String path) {
+    private static JSONArray readJsonArray(String path) {
         File file = new File(path);
         StringBuilder jsonString = new StringBuilder();
         try (Scanner reader = new Scanner(file)) {
@@ -551,6 +551,9 @@ public class Game {
         }
     }
 
+    public static Person getPlayer() {
+        return player;
+    }
 }
 
 
