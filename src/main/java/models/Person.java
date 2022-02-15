@@ -13,7 +13,7 @@ public class Person {
     private Careers career = Careers.PASSION;
     private Person partner = null;
     private String name;
-
+    private boolean midLifeCrisis;
     //Constructors
     public Person() {
         money.setMaximumFractionDigits(0);
@@ -424,6 +424,14 @@ public class Person {
 
     public void setName(String playerName) {
         this.name = playerName;
+    }
+
+    public boolean isMidLifeCrisis() {
+        return midLifeCrisis;
+    }
+
+    public void setMidLifeCrisis(boolean midLifeCrisis) {
+        this.midLifeCrisis = midLifeCrisis;
     }
 
     @Override
