@@ -14,7 +14,7 @@ public class Game {
     //Fields
     SceneContainer scenes;
     static Person player = new Person();
-    Map<String,Person> listPlayer;
+    Map<String, Person> listPlayer;
     private boolean doesPlayerExist = false;
     boolean isWindows = System.getProperty("os.name").contains("Windows");
 
@@ -29,21 +29,28 @@ public class Game {
         listPlayer = scenes.getUsers();
         //Prints Welcome ASCII art banner
         welcome();
+        //Prompt user for name.
+        System.out.println("Enter your Name: ");
+        String playerName = getInput();
+
+        while (playerName.isEmpty()) {
+            System.out.println("Name is required. Please enter your name.");
+            playerName = getInput();
+        }
         //Checks to see if there is a saved file to read in previous score.
-//        checkSaveFile();
-        String result = retrievePreviousSession();
+        String result = retrievePreviousSession(playerName);
         System.out.println(result);
 
         if (!doesPlayerExist) {
             //Initializes Person instance with various prompts to obtain values.
             //It also runs through the backstory sequence
-            getPlayerBasicData();
+            getPlayerBasicData(playerName);
             clearScreen();
             //Runs through Career scene
             runSceneOneCareer(player);
         }
 
-
+        getPlayer().setFinishedInitialization(true);
         while (shouldPlay()) {
             clearScreen();
 
@@ -60,19 +67,21 @@ public class Game {
             // handles the individual scene prompting, handling user response and returning index of response.
             int input = prompt(currentScene);
             clearScreen();
-            System.out.println(player.getPlayerInformation());
-            // display outcome of scene based on user response.
-            displayOutcome(input, currentScene);
-            // applies effect based on user response
-            runEffect(input, currentScene);
-            // prints out users net-work, and return string of 5 year summary.
-            String salaryReport = player.addSalary();
-            System.out.println("\nEnter any key to see your 5-year summary");
-            getInput();
-            //Display's value of salaryReport
-            displaySceneSummary(salaryReport);
-            //prompts user to determine if user want to continue game, save game, or quit game
-            nextTurnPrompt();
+            if (input != -1) {
+                System.out.println(player.getPlayerInformation());
+                // display outcome of scene based on user response.
+                displayOutcome(input, currentScene);
+                // applies effect based on user response
+                runEffect(input, currentScene);
+                // prints out users net-work, and return string of 5 year summary.
+                String salaryReport = player.addSalary();
+                System.out.println("\nEnter any key to see your 5-year summary");
+                getInput();
+                //Display's value of salaryReport
+                displaySceneSummary(salaryReport);
+                //prompts user to determine if user want to continue game, save game, or quit game
+                nextTurnPrompt();
+            }
         }
         playAgainOrExit();
     }
@@ -121,10 +130,30 @@ public class Game {
                 this.helpMenu();
             //Scenario two: User types 'quit' (Case does not matter).
             if (userInput.equalsIgnoreCase("quit")) {
-                scenes.saveUsers(player);
-                System.out.println("Quitting game.!");
-                System.exit(1);
-                return "";
+                if (getPlayer().isFinishedInitialization()) {
+                    scenes.saveUsers(player);
+                    System.out.println("Quitting game.!");
+                    System.exit(1);
+                    return "";
+                }
+                System.out.println("You cannot quit game at this stage.");
+            }
+
+            if (userInput.equalsIgnoreCase("reset")) {
+                if (getPlayer().isFinishedInitialization()) {
+                    System.out.println("Appreciate the opportunity to start over. This is once in a lifetime. Make the best of your second chance.");
+                    System.out.println(Art.getArt("startOver"));
+                    scanner.nextLine();
+                    System.out.println("Press enter to continue.");
+                    getPlayer().startOver();
+                    setUpPrivilegeStatus();
+                    processBackstories(getBackStoryScenes());
+                    setUpCollegeStatus();
+                    selections = new String[]{"reset"};
+                } else {
+                    System.out.println("You need to begin game before you can Reset/Start Over");
+                }
+
             }
             //Scenario three: If no parameter value is passed in then input is simply returned.
             if (selections.length == 0)
@@ -147,10 +176,8 @@ public class Game {
      *
      * @return String message that defines the result of the search.
      */
-    public String retrievePreviousSession() {
+    public String retrievePreviousSession(String playerSavedName) {
         String resultString;
-        System.out.println("Enter previous user name...:");
-        String playerSavedName = getInput();
         if (listPlayer.containsKey(playerSavedName)) {
             resultString = "\n\nPlayer Found! You will continue where you left off...";
             player = listPlayer.get(playerSavedName);
@@ -203,17 +230,10 @@ public class Game {
      * Method is used to prompt user for name, privilege status, and if they want to go to college.
      * Values are set to the Person Object.
      */
-    private void getPlayerBasicData() {
+    private void getPlayerBasicData(String playerName) {
 
         String printBackstoryArt = Art.getArt("backstory");
         System.out.println(printBackstoryArt);
-        System.out.println("Enter your Name: ");
-        String playerName = getInput();
-
-        while (playerName.isEmpty()) {
-            System.out.println("Name is required. Please enter your name.");
-            playerName = getInput();
-        }
 
         if (playerName.equalsIgnoreCase("DEV")) {
             player.setName("DEV");
@@ -225,14 +245,25 @@ public class Game {
             System.out.println("Playing the game in DEV mode");
             return;
         }
+        player.setName(playerName);
+        setUpPrivilegeStatus();
+
+        //Process each scene in the backstory file and uses user input to update players (Person instance) fields
+        processBackstories(getBackStoryScenes());
+
+        System.out.println();
+        setUpCollegeStatus();
+    }
+
+    public void setUpPrivilegeStatus(){
         System.out.println("Select your privilege status (Working Class)/(Middle Class): ");
         //Will continue to prompt user to select one of the options available.
         String getChoice = getInput("working class", "middle class");
 
         if (getChoice.equalsIgnoreCase("working class")) {
-            this.player.setNetWorth(player.getNetWorth() - 25000);
+            player.setNetWorth(player.getNetWorth() - 25000);
         } else if (getChoice.contains("middle class")) {
-            this.player.setNetWorth(player.getNetWorth() + 25000);
+            player.setNetWorth(player.getNetWorth() + 25000);
         }
         System.out.println("" +
                 "You chose: " + getChoice + "\n" +
@@ -240,23 +271,19 @@ public class Game {
 
         clearScreen();
 
-//        System.out.println(printBackstoryArt);
-        //Creates List data structure of the various scenes in the backstory.json file.
-        List<Backstory> backstories = getBackStoryScenes();
-        //Process each scene in the backstory file and uses user input to update players (Person instance) fields
-        processBackstories(backstories);
-        System.out.println();
-        // TODO: Make this better narrative
+
+    }
+
+    public void setUpCollegeStatus(){
+
         System.out.println("Do you want to go to college? (Y/N): ");
         String educationChoice = getInput("y", "n");
 
         boolean userWantsCollege = educationChoice.equalsIgnoreCase("y");
-        System.out.printf("Your name is %s. You chose to %s college.", playerName, userWantsCollege ? "go to" : "skip");
+        System.out.printf("Your name is %s. You chose to %s college.", getPlayer().getName(), userWantsCollege ? "go to" : "skip");
 
         if (userWantsCollege)
             player.adjustNetWorth(-100000);
-
-        player.setName(playerName);
         player.setEducation(userWantsCollege);
     }
 
@@ -381,7 +408,6 @@ public class Game {
         }
 
         System.out.println("\nYou chose a " + player.getCareer() + " job");
-
     }
 
     /**
@@ -400,16 +426,18 @@ public class Game {
         //Using overloading to first pass in List<String> of option and then converting to
         //array to use alternative getInput(varargs)
         String input = getInput(currentScene.getOptions());
-
         int selectedIndex = 0;
+        if ("reset".equalsIgnoreCase(input)) {
+            selectedIndex = -1;
+        } else {
+            // currentScene.getOptions.indexOf(input) is case-sensitive and the user might not enter the correct case
+            // doing it this way ignores case and still gets the index
+            for (String option : currentScene.getOptions()) {
+                if (option.equalsIgnoreCase(input))
+                    break;
 
-        // currentScene.getOptions.indexOf(input) is case-sensitive and the user might not enter the correct case
-        // doing it this way ignores case and still gets the index
-        for (String option : currentScene.getOptions()) {
-            if (option.equalsIgnoreCase(input))
-                break;
-
-            selectedIndex++;
+                selectedIndex++;
+            }
         }
 
 

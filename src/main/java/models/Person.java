@@ -14,6 +14,8 @@ public class Person {
     private Person partner = null;
     private String name;
     private boolean midLifeCrisis;
+    private boolean finishedInitialization;
+
     //Constructors
     public Person() {
         money.setMaximumFractionDigits(0);
@@ -56,6 +58,18 @@ public class Person {
     }
 
     //Business Methods
+
+    public void startOver(){
+        setNetWorth(0);
+        setHealth(100);
+        setMidLifeCrisis(false);
+        setEducation(false);
+        setAge(18);
+        setIntellect(0);
+        setStrength(0);
+        setCreativity(0);
+
+    }
 
     /**
      * Method that returns a Formatted banner with Name, net-worth, age, and health.
@@ -434,6 +448,34 @@ public class Person {
         this.midLifeCrisis = midLifeCrisis;
     }
 
+    public boolean isFinishedInitialization() {
+        return finishedInitialization;
+    }
+
+    public void setFinishedInitialization(boolean finishedInitialization) {
+        this.finishedInitialization = finishedInitialization;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setIntellect(int intellect) {
+        this.intellect = intellect;
+    }
+
+    public void setCreativity(int creativity) {
+        this.creativity = creativity;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -451,6 +493,8 @@ public class Person {
                 ", career=" + career +
                 ", partner=" + partner +
                 ", name='" + name + '\'' +
+                ", midLifeCrisis=" + midLifeCrisis +
+                ", finishedInitialization=" + finishedInitialization +
                 '}';
     }
 }
