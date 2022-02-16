@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="73.0" fitWidth="364.0" layoutX="118.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@careers.png" />
+         </image>
+      </ImageView>
+      <RadioButton layoutX="40.0" layoutY="206.0" mnemonicParsing="false" text="UNDERWATER SEA WELDER" textFill="#2126ab" />
+      <RadioButton layoutX="254.0" layoutY="242.0" mnemonicParsing="false" text="TREE CUTTER" textFill="#2b20ae" />
+      <RadioButton layoutX="443.0" layoutY="206.0" mnemonicParsing="false" text="MARINE" textFill="#312bab" />
+      <RadioButton layoutX="442.0" layoutY="290.0" mnemonicParsing="false" text="PLUMBER" textFill="#311fb9" />
+      <RadioButton layoutX="40.0" layoutY="242.0" mnemonicParsing="false" text="DATA ENTRY" textFill="#2917c3" />
+      <RadioButton layoutX="254.0" layoutY="206.0" mnemonicParsing="false" text="SOFTWARE ENGINEER" textFill="#3826c6" />
+      <Button layoutX="531.0" layoutY="361.0" mnemonicParsing="false" text="Next" />
+      <RadioButton layoutX="40.0" layoutY="281.0" mnemonicParsing="false" text="MUSICIAN" textFill="#2112c3" />
+      <RadioButton layoutX="443.0" layoutY="242.0" mnemonicParsing="false" text="SCULPTOR" textFill="#2b0fb5" />
+      <RadioButton layoutX="252.0" layoutY="290.0" mnemonicParsing="false" text="PERFORMER" textFill="#3b12dd" />
+   </children>
+</AnchorPane>
