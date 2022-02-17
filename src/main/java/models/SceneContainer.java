@@ -10,6 +10,7 @@ public class SceneContainer {
     //Fields
     private final Random random = new Random();
     private final List<Map<String, List<Scene>>> categories = new ArrayList<>();
+    private  Map<String, List<Scene>> midLifCrisis;
     private Map<String, Person> users;
     private String dataBasePath = "userStorage.json";
 
@@ -21,6 +22,8 @@ public class SceneContainer {
         Map<String, List<Scene>> privilege = loadScenes("privilege", "true", "false");
         Map<String, List<Scene>> children = loadScenes("children", "true", "false");
         Map<String, List<Scene>> health = loadScenes("health", "true", "false");
+        Map<String, List<Scene>> midLifeSceneHolder = loadScenes("midlifeCrisis", "true", "false");
+
 
 
         categories.add(career);
@@ -30,6 +33,7 @@ public class SceneContainer {
         categories.add(health);
         categories.add(children);
         loadUsers(getDataBasePath());
+        setMidLifCrisis(midLifeSceneHolder);
 
     }
 
@@ -176,6 +180,11 @@ public class SceneContainer {
                 }
 
             }
+            else{
+                WriteFile userWriter = new WriteFile("userStorage.json", "{}");
+                userWriter.save();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -195,7 +204,6 @@ public class SceneContainer {
         String result = "{}";
         //When user prompts to quit if the new Person object has not been created then new Object is not included in map of users
         if (person.getName() != null) {
-            System.out.println(person);
             getUsers().put(person.getName(), person);
         }
         //If users Map filed is empty then external file is saved with default value
@@ -242,6 +250,37 @@ public class SceneContainer {
         userWriter.save();
     }
 
+    /**
+     * Method to get Midlife crisis scene
+     * @param key 'true' or 'false': If true player encounters midlife crisis for the first time. If false this is the second time.
+     * @return Scene object of true or false scene (scene is based on Person's midlifeCrisis field)
+     */
+    public Scene getMidLifeCrisisScene(String key){
+        return getMidLifCrisis().get(key).get(0);
+    }
+
+    /**
+     * Method to retrive a midlife crisis scene or a random from other categories
+     * @param player Person object of the current player
+     * @return Scene object of the categories or midlife crisis scenes.
+     */
+    public Scene getNewScene(Person player){
+        Scene result;
+        int randomNumber = random.nextInt(3);
+        if (player.getAge() > 40 && player.isMidLifeCrisis() && randomNumber == 2){
+            result = getMidLifeCrisisScene("true");
+            player.setMidLifeCrisis(true);
+        }
+        else if (player.getAge() > 40 && randomNumber == 2){
+            result = getMidLifeCrisisScene("false");
+        }
+        else {
+            //A random category is selected , available option: career, children, education, health, partner, privilege
+            result = getRandomScene(player);
+        }
+        return result;
+    }
+
     //Setter and Getters
     public Map<String, Person> getUsers() {
         return users;
@@ -253,5 +292,13 @@ public class SceneContainer {
 
     public String getDataBasePath() {
         return dataBasePath;
+    }
+
+    public Map<String, List<Scene>> getMidLifCrisis() {
+        return midLifCrisis;
+    }
+
+    public void setMidLifCrisis(Map<String, List<Scene>> midLifCrisis) {
+        this.midLifCrisis = midLifCrisis;
     }
 }
