@@ -180,6 +180,11 @@ public class SceneContainer {
                 }
 
             }
+            else{
+                WriteFile userWriter = new WriteFile("userStorage.json", "{}");
+                userWriter.save();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -199,7 +204,6 @@ public class SceneContainer {
         String result = "{}";
         //When user prompts to quit if the new Person object has not been created then new Object is not included in map of users
         if (person.getName() != null) {
-            System.out.println(person);
             getUsers().put(person.getName(), person);
         }
         //If users Map filed is empty then external file is saved with default value
